@@ -35,5 +35,14 @@ public class DetailKelasActivity extends AppCompatActivity {
                 startActivity(intentSiswa);
             }
         });
+        rvDaftarTugas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentTugas = new Intent(view.getContext(), RowTugasActivity.class);
+                intentTugas.putExtra("data", kelasRowModel);
+
+                startActivity(intentTugas);
+            }
+        });
     }
 }
