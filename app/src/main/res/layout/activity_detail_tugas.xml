@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.InfoDetailActivity"
+    tools:context=".activity.DetailTugasActivity"
     android:padding="16dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,9 +26,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Tanggal"
+            android:layout_gravity="end"
+            android:textStyle="italic"
+            android:id="@+id/tv_tanggal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guru"
+            android:layout_gravity="end"
+            android:id="@+id/tv_guru"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Due :"
             />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_due"
+            android:textColor="	#FF0000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kelas"
+            android:id="@+id/kelas"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

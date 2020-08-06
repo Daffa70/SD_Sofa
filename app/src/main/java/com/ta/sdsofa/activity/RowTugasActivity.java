@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -43,11 +44,16 @@ public class RowTugasActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_rowtugas);
         utilMessage = new UtilMessage(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
+
         tugasAdapter = new TugasAdapter(this, new ArrayList<TugasModel>());
         tugasAdapter.setAdapterListener(new TugasAdapter.TugasAdapterListener() {
             @Override
             public void onItemClickListener(TugasModel tugasModel) {
+                Intent intentt = new Intent(RowTugasActivity.this, DetailTugasActivity.class);
+                intentt.putExtra("data", tugasModel);
                 
+
+                startActivity(intentt);
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
