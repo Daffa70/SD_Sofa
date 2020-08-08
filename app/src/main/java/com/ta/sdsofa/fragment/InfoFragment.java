@@ -139,6 +139,9 @@ public class InfoFragment extends Fragment {
             Intent intent = new Intent(getContext(), TambahInfoActivity.class);
             startActivity(intent);
         }
+        else if(item.getItemId() == R.id.refresh){
+            getData();
+        }
         return super.onOptionsItemSelected(item);
     }
 }

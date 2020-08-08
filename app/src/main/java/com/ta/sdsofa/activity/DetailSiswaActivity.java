@@ -87,6 +87,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
                                 JSONObject item = jsonData.getJSONObject(index);
 
                                 SiswaModel siswaModel = new SiswaModel();
+                                siswaModel.setId(item.getString("id"));
                                 siswaModel.setNisn(item.getString("nisn"));
                                 siswaModel.setNama(item.getString("nama"));
                                 siswaModel.setAlamat(item.getString("alamat"));
@@ -116,5 +117,25 @@ public class DetailSiswaActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(DetailSiswaActivity.this).add(request);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(sessionManager.getRole().equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_tambah_siswa, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_tambah){
+            Intent intent = new Intent(this, TambahSiswaActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.action_refresh){
+            getData();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -53,6 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kelas"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kelas"
             android:id="@+id/kelas"/>
         <TextView
             android:layout_width="wrap_content"

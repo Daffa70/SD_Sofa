@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.EditInfoActivity"></activity>
+        <activity android:name=".activity.EditTugasActivity"></activity>
+        <activity android:name=".activity.TambahTugasActivity" />
+        <activity android:name=".activity.TambahSiswaActivity" />
+        <activity android:name=".activity.EditSiswaActivity" />
+        <activity android:name=".activity.EditInfoActivity" />
         <activity android:name=".activity.TambahInfoActivity" />
         <activity android:name=".activity.DetailJadwalActivity" />
         <activity android:name=".activity.MataPelajaranActivity" />

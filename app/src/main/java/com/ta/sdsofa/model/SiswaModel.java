@@ -13,6 +13,15 @@ public class SiswaModel implements Parcelable {
     private String tahun_masuk;
     private String wali_murid;
     private String kelas;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNisn() {
         return nisn;
@@ -102,6 +111,7 @@ public class SiswaModel implements Parcelable {
         parcel.writeString(this.tahun_masuk);
         parcel.writeString(this.wali_murid);
         parcel.writeString(this.kelas);
+        parcel.writeString(this.id);
     }
 
     public SiswaModel(){
@@ -118,6 +128,7 @@ public class SiswaModel implements Parcelable {
         this.tahun_masuk = in.readString();
         this.wali_murid = in.readString();
         this.kelas = in.readString();
+        this.id = in.readString();
 
     }
 

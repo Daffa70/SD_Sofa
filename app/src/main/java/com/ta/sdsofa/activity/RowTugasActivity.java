@@ -1,11 +1,14 @@
 package com.ta.sdsofa.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,6 +20,7 @@ import com.bumptech.glide.util.Util;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.SiswaAdapter;
 import com.ta.sdsofa.adapter.TugasAdapter;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
 import com.ta.sdsofa.model.KelasRowModel;
 import com.ta.sdsofa.model.SiswaModel;
@@ -35,6 +39,7 @@ public class RowTugasActivity extends AppCompatActivity {
     private KelasRowModel kelasRowModel;
     private TugasAdapter tugasAdapter;
     private UtilMessage utilMessage;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class RowTugasActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.rv_rowtugas);
         utilMessage = new UtilMessage(this);
+        sessionManager = new SessionManager(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
 
         tugasAdapter = new TugasAdapter(this, new ArrayList<TugasModel>());
@@ -108,5 +114,25 @@ public class RowTugasActivity extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(RowTugasActivity.this).add(request);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(sessionManager.getRole().equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_tambah_tugas, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_tambah){
+            Intent intent = new Intent(this, TambahTugasActivity.class);
+            startActivity(intent);
+        }
+        else if(item.getItemId() == R.id.action_refresh){
+            getData();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

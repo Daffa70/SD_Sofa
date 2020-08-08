@@ -94,7 +94,7 @@ public class InfoDetailActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         StringRequest request = new StringRequest(Request.Method.POST,
-                                BASE_URL + "hapus_berita.php",
+                                BASE_URL + "hapus_info.php",
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
