@@ -44,5 +44,14 @@ public class DetailKelasActivity extends AppCompatActivity {
                 startActivity(intentTugas);
             }
         });
+        rvMataPelajaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentMataPelajaran = new Intent(view.getContext(), MataPelajaranActivity.class);
+                intentMataPelajaran.putExtra("data", kelasRowModel);
+
+                startActivity(intentMataPelajaran);
+            }
+        });
     }
 }
