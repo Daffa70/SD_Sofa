@@ -1,11 +1,14 @@
 package com.ta.sdsofa.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import com.bumptech.glide.util.Util;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.InfoAdapter;
 import com.ta.sdsofa.adapter.SiswaAdapter;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
 import com.ta.sdsofa.model.KelasRowModel;
 import com.ta.sdsofa.model.SiswaModel;
@@ -35,6 +39,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
     private SiswaAdapter siswaAdapter;
     private UtilMessage utilMessage;
     private KelasRowModel kelasRowModel;
+    private SessionManager sessionManager;
 
 
     @Override
@@ -44,6 +49,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
 
         recyclerViewSiswa = findViewById(R.id.rv_list_siswa);
         utilMessage = new UtilMessage(this);
+        sessionManager = new SessionManager(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
         siswaAdapter = new SiswaAdapter(this, new ArrayList<SiswaModel>());
         siswaAdapter.setAdapterListener(new SiswaAdapter.SiswaAdapterListener() {
@@ -61,6 +67,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
 
         getData();
     }
+
 
     private void getData() {
         utilMessage.showProgressBar("Getting Info...");

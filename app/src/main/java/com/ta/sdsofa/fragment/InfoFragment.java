@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.activity.InfoDetailActivity;
+import com.ta.sdsofa.activity.TambahInfoActivity;
 import com.ta.sdsofa.adapter.InfoAdapter;
 import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
@@ -78,6 +80,7 @@ public class InfoFragment extends Fragment {
         getData();
     }
 
+
     private void getData() {
         utilMessage.showProgressBar("Getting Info...");
         StringRequest request = new StringRequest(Request.Method.GET,
@@ -122,5 +125,20 @@ public class InfoFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(request);
     }
-    
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        if(sessionManager.getRole().equals("admin")) {
+            inflater.inflate(R.menu.menu_tambah_info, menu);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_tambah){
+            Intent intent = new Intent(getContext(), TambahInfoActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
