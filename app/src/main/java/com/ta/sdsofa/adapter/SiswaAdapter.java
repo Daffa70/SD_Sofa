@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.model.InfoModel;
 import com.ta.sdsofa.model.SiswaModel;
 
 import java.util.ArrayList;
+
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.SiswaViewHolder>{
     private Context context;
@@ -69,11 +72,17 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.SiswaViewHol
 
             tvNama = itemView.findViewById(R.id.textViewNama);
             tvNisn = itemView.findViewById(R.id.textViewNISN);
+            ivImage = itemView.findViewById(R.id.image);
         }
 
         public void bind(final SiswaModel siswaModel) {
             tvNama.setText(siswaModel.getNama());
             tvNisn.setText(siswaModel.getNisn());
+
+            Glide.with(context)
+                    .load(IMAGE_URL+siswaModel.getFoto())
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .into(ivImage);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

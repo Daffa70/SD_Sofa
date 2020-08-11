@@ -111,6 +111,8 @@ public class TambahSiswaActivity extends AppCompatActivity {
         final String namawali = edtnamawali.getText().toString();
         final String nohpwali = edtnohpwali.getText().toString();
 
+
+
         int   day  = tanggal.getDayOfMonth();
         int   month= tanggal.getMonth();
         int   year = tanggal.getYear();
@@ -122,37 +124,13 @@ public class TambahSiswaActivity extends AppCompatActivity {
 
 
 
-
         if (nisn.trim().isEmpty()){
             Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
         }
-        else if (kelas.trim().isEmpty()){
-            Toast.makeText(this , "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (nama.trim().isEmpty()){
-            Toast.makeText(this , "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (alamat.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (kotaklhir.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (nohp.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (tahunmasuk.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (namawali.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
-        else if (nohpwali.trim().isEmpty()){
-            Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
-        }
+
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
-                    BASE_URL + "tambah_buku.php",
+                    BASE_URL + "tambah_siswa.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -207,7 +185,8 @@ public class TambahSiswaActivity extends AppCompatActivity {
             utilMessage.showProgressBar("Submiting Data");
             Volley.newRequestQueue(this).add(request);
         }
-    }
+        }
+
 
     private void resetInput() {
         edtnisn.setText("");

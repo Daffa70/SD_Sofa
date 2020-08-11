@@ -97,6 +97,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
                                 siswaModel.setTahun_masuk(item.getString("tahun_masuk"));
                                 siswaModel.setWali_murid(item.getString("wali_murid"));
                                 siswaModel.setKelas(item.getString("kelas"));
+                                siswaModel.setFoto(item.getString("foto"));
                                 data.add(siswaModel);
                             }
 

@@ -57,25 +57,6 @@
             android:layout_height="wrap_content"
             android:hint="Masukan Alamat"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kota Lahir"
-            android:layout_marginTop="8dp"
-            />
-
-        <DatePicker
-            android:id="@+id/edt_tanggal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
-
-        <EditText
-            android:id="@+id/edt_kotalahir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Masukan Kota Lahir" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,6 +64,26 @@
             android:text="Tanggal Lahir"
             android:layout_marginTop="8dp"
             />
+        <DatePicker
+            android:id="@+id/edt_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kota Lahir"
+            android:layout_marginTop="8dp"
+            />
+
+        <EditText
+            android:id="@+id/edt_kotalahir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukan Kota Lahir" />
+
+
 
         <TextView
             android:layout_width="wrap_content"
