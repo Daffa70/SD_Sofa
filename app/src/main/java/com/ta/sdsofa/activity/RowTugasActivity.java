@@ -57,7 +57,7 @@ public class RowTugasActivity extends AppCompatActivity {
             public void onItemClickListener(TugasModel tugasModel) {
                 Intent intentt = new Intent(RowTugasActivity.this, DetailTugasActivity.class);
                 intentt.putExtra("data", tugasModel);
-                
+
 
                 startActivity(intentt);
             }
@@ -95,6 +95,7 @@ public class RowTugasActivity extends AppCompatActivity {
                                 tugasModel.setKelas(item.getString("kelas"));
                                 tugasModel.setDate(item.getString("date"));
                                 tugasModel.setDeadline(item.getString("deadline"));
+                                tugasModel.setFoto(item.getString("foto"));
                                 data.add(tugasModel);
                             }
 
@@ -128,6 +129,7 @@ public class RowTugasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.action_tambah){
             Intent intent = new Intent(this, TambahTugasActivity.class);
+            intent.putExtra("kelas", kelasRowModel);
             startActivity(intent);
         }
         else if(item.getItemId() == R.id.action_refresh){

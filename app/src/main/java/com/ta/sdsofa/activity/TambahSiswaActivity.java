@@ -69,7 +69,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
         edtnohp = findViewById(R.id.edt_nohp);
         edttahunmasuk = findViewById(R.id.edt_tahun_masuk);
         edtnamawali = findViewById(R.id.edt_nama_wali);
-        edtnohpwali = findViewById(R.id.edt_nama_wali);
+        edtnohpwali = findViewById(R.id.edt_nohp_wali);
 
         tanggal = findViewById(R.id.edt_tanggal);
 

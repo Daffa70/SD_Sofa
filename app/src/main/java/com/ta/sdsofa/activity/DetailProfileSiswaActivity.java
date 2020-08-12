@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.util.Util;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.helper.SessionManager;
@@ -31,12 +33,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class DetailProfileSiswaActivity extends AppCompatActivity {
     private TextView nama, nisn, kelas, nohp, tanggal_lahir, tahunmasuk, nama_wali, nohpwali;
     private SiswaModel siswaModel;
     private SessionManager sessionManager;
     private UtilMessage utilMessage;
+    private ImageView fotoSiswa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
         tahunmasuk = findViewById(R.id.tv_tahunmasuk);
         nama_wali = findViewById(R.id.tv_namawali);
         nohpwali = findViewById(R.id.tv_hpwali);
+        fotoSiswa = findViewById(R.id.foto_siswa);
 
         siswaModel = (SiswaModel) getIntent().getExtras().get("data");
 
@@ -69,6 +74,13 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
             nama_wali.setText(siswaModel.getWali_murid());
             nohpwali.setText(siswaModel.getNohporangtua());
             tanggal_lahir.setText(siswaModel.getTanggal_lahir());
+
+            Glide.with(this)
+                    .load(IMAGE_URL+siswaModel.getFoto())
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .into(fotoSiswa);
+
+
         }
     }
 

@@ -12,6 +12,15 @@ public class TugasModel implements Parcelable {
     private String kelas;
     private String deadline;
     private String date;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getDate() {
         return date;
@@ -92,6 +101,7 @@ public class TugasModel implements Parcelable {
         parcel.writeString(this.kelas);
         parcel.writeString(this.deadline);
         parcel.writeString(this.date);
+        parcel.writeString(this.foto);
     }
 
     public TugasModel(){
@@ -107,6 +117,7 @@ public class TugasModel implements Parcelable {
         this.kelas = in.readString();
         this.deadline = in.readString();
         this.date = in.readString();
+        this.foto = in.readString();
 
     }
 
