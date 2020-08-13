@@ -24,15 +24,14 @@
         <activity android:name=".activity.DetailKelasActivity" />
         <activity android:name=".activity.InfoDetailActivity" />
         <activity android:name=".MainActivityAdmin" />
-        <activity android:name=".CekSession" />
-        <activity android:name=".activity.LoginActivityActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".CekSession" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.LoginActivityActivity" />
+        <activity android:name=".MainActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

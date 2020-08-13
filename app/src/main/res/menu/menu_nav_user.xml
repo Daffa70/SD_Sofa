@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        />
+    <item
+        android:id="@+id/navigation_kelas"
+        android:title="Kelas"
+        android:icon="@drawable/ic_kelas"
+        />
+    <item
+        android:id="@+id/navigation_info"
+        android:title="Info"
+        android:icon="@drawable/ic_info"
+        />
+    <item
+        android:id="@+id/navigation_pembayaran"
+        android:title="SPP"
+        android:icon="@drawable/ic_spp"
+        />
+    <item
+        android:id="@+id/navigation_user"
+        android:title="User"
+        android:icon="@drawable/ic_account"
+        />
+</menu>

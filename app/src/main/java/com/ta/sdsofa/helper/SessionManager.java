@@ -7,6 +7,7 @@ public class SessionManager {
     private SharedPreferences preferences;
     public static final String KEY_USERID ="user_id";
     public static final String KEY_ROLE = "user_role";
+    public static final String KELAS = "kelas";
 
     public SessionManager(Context context){
         preferences = context.getSharedPreferences("prefSessionManager",
@@ -34,6 +35,14 @@ public class SessionManager {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_ROLE, userRole);
         editor.apply();
+    }
+    public void setKelas(String kelas){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KELAS, kelas);
+        editor.apply();
+    }
+    public String getKelas(){
+        return preferences.getString(KELAS, null);
     }
     public String getUserId(){
         return preferences.getString(KEY_USERID, null);

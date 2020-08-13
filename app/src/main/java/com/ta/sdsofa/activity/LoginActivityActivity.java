@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.ta.sdsofa.MainActivity;
 import com.ta.sdsofa.MainActivityAdmin;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.helper.SessionManager;
@@ -86,7 +87,7 @@ public class LoginActivityActivity extends AppCompatActivity {
                                     sessionManager.setUserRole(role);
 
                                     if(role.equals("siswa")){
-                                        Intent intentSiswa = new Intent();
+                                        Intent intentSiswa = new Intent(LoginActivityActivity.this, MainActivity.class);
                                         startActivity(intentSiswa);
                                     }
                                     else if(role.equals("admin")){
