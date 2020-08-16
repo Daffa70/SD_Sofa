@@ -30,6 +30,7 @@ public class DaftarListSppActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "now");
+                intent.putExtra("status", "&status=menunggu_konfirmasi");
 
                 startActivity(intent);
             }

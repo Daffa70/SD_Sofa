@@ -36,7 +36,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
     private KelasRowModel kelasRowModel;
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
-    private String bulan;
+    private String bulan, status_pembayaran;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
         bulan = getIntent().getExtras().getString("bulan");
+        status_pembayaran = getIntent().getExtras().getString("status_pembayaran");
 
         sppAdapter = new SppAdapter(this, new ArrayList<SppModel>());
         sppAdapter.setAdapterListener(new SppAdapter.SppAdapterListener() {
@@ -68,7 +69,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
     private void getData() {
         utilMessage.showProgressBar("Getting Info...");
         StringRequest request = new StringRequest(Request.Method.GET,
-                BASE_URL + "get_spp.php?status=menunggu_konfirmasi&bulan="+bulan+"&kelas="+kelasRowModel.getKelas(),
+                BASE_URL + "get_spp.php?bulan="+bulan+"&kelas="+kelasRowModel.getKelas()+"&status=menunggu_konfirmasi",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

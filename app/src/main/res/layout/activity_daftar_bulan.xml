@@ -7,6 +7,13 @@
     tools:context=".activity.DaftarBulanActivity"
     android:padding="16dp"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pembayaran Bulan"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"/>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

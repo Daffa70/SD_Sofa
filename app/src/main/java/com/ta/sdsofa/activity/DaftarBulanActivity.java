@@ -40,6 +40,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "1");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -51,6 +52,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "2");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -62,6 +64,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "3");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -73,6 +76,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "4");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -84,6 +88,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "5");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -95,6 +100,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "6");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -106,6 +112,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "7");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -117,6 +124,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "8");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -128,6 +136,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "9");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -139,6 +148,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "10");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -150,6 +160,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "11");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
@@ -161,6 +172,7 @@ public class DaftarBulanActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
                 intent.putExtra("data", kelasRowModel);
                 intent.putExtra("bulan", "12");
+                intent.putExtra("status", "");
 
                 startActivity(intent);
             }
