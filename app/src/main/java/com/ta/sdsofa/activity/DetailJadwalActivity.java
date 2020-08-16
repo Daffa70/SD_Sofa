@@ -17,6 +17,7 @@ import com.bumptech.glide.util.Util;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.JadwalAdapter;
 import com.ta.sdsofa.adapter.TugasAdapter;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
 import com.ta.sdsofa.model.JadwalModel;
 import com.ta.sdsofa.model.KelasRowModel;
@@ -36,6 +37,7 @@ public class DetailJadwalActivity extends AppCompatActivity {
     private JadwalAdapter jadwalAdapter;
     private KelasRowModel kelasRowModel;
     private String  mataPelajaranActivity;
+    private SessionManager sessionManager;
 
 
 
@@ -48,13 +50,17 @@ public class DetailJadwalActivity extends AppCompatActivity {
         utilMessage = new UtilMessage(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
         mataPelajaranActivity = getIntent().getExtras().getString("hari");
+        sessionManager = new SessionManager(this);
         jadwalAdapter = new JadwalAdapter(this, new ArrayList<JadwalModel>());
-        jadwalAdapter.setAdapterListener(new JadwalAdapter.JadwalAdapterListener() {
-            @Override
-            public void onItemClickListener(JadwalModel jadwalModel) {
-
-            }
-        });
+        if(sessionManager.getRole().equals("admin")) {
+            jadwalAdapter.setAdapterListener(new JadwalAdapter.JadwalAdapterListener() {
+                @Override
+                public void onItemClickListener(JadwalModel jadwalModel) {
+                Intent intent = new Intent(DetailJadwalActivity.this, DetailJadwalDuoActivity.class);
+                intent.putExtra("data", jadwalModel);
+                }
+            });
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(jadwalAdapter);
 

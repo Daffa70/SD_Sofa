@@ -38,9 +38,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "1");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -50,9 +52,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "2");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -62,9 +66,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "3");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -74,9 +80,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "4");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -86,9 +94,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "5");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -98,9 +108,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "6");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -110,9 +122,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "7");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -122,9 +136,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "8");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -134,9 +150,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "9");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -146,9 +164,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "10");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -158,9 +178,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "11");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -170,9 +192,11 @@ public class DaftarBulanActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DaftarBulanActivity.this, RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "12");
                 intent.putExtra("status", "");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }

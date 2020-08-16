@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,7 +37,8 @@ public class RowSppKonfirmasi extends AppCompatActivity {
     private KelasRowModel kelasRowModel;
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
-    private String bulan, status_pembayaran;
+    private String bulan, status_pembayaran,web, kelas, id;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,13 @@ public class RowSppKonfirmasi extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_rowSpp);
         utilMessage = new UtilMessage(this);
         sessionManager = new SessionManager(this);
-        kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
+
         bulan = getIntent().getExtras().getString("bulan");
         status_pembayaran = getIntent().getExtras().getString("status_pembayaran");
+        web = getIntent().getExtras().getString("web");
+        kelas = getIntent().getExtras().getString("kelas");
+        status_pembayaran = getIntent().getExtras().getString("status");
+        id = getIntent().getExtras().getString("id");
 
         sppAdapter = new SppAdapter(this, new ArrayList<SppModel>());
         sppAdapter.setAdapterListener(new SppAdapter.SppAdapterListener() {
@@ -69,7 +75,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
     private void getData() {
         utilMessage.showProgressBar("Getting Info...");
         StringRequest request = new StringRequest(Request.Method.GET,
-                BASE_URL + "get_spp.php?bulan="+bulan+"&kelas="+kelasRowModel.getKelas()+"&status=menunggu_konfirmasi",
+                BASE_URL+web+bulan+"&kelas="+kelas+status_pembayaran+id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

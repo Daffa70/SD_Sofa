@@ -28,9 +28,11 @@ public class DaftarListSppActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RowSppKonfirmasi.class);
-                intent.putExtra("data", kelasRowModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
                 intent.putExtra("bulan", "now");
                 intent.putExtra("status", "&status=menunggu_konfirmasi");
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("id", "");
 
                 startActivity(intent);
             }
@@ -41,6 +43,8 @@ public class DaftarListSppActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DaftarBulanActivity.class);
                 intent.putExtra("data", kelasRowModel);
+                intent.putExtra("web", "get_spp.php?bulan=");
+                intent.putExtra("bulan", "now");
 
                 startActivity(intent);
             }

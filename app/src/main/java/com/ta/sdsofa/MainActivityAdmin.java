@@ -59,10 +59,6 @@ public class MainActivityAdmin extends AppCompatActivity {
                 title = "Info";
                 fragment = new InfoFragment();
                 break;
-            case R.id.navigation_pembayaran:
-                title = "Pembayaran";
-                fragment = new PembayaranFragment();
-                break;
             case R.id.navigation_user:
                 title = "Profile";
                 fragment = new ProfilAdminFragment();

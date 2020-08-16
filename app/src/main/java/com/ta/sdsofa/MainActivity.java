@@ -16,6 +16,7 @@ import com.ta.sdsofa.fragment.InfoFragment;
 import com.ta.sdsofa.fragment.KelasFragment;
 import com.ta.sdsofa.fragment.PembayaranFragment;
 import com.ta.sdsofa.fragment.ProfilAdminFragment;
+import com.ta.sdsofa.fragment.ProfleUserFragment;
 import com.ta.sdsofa.fragment.UserKelasFragment;
 import com.ta.sdsofa.helper.SessionManager;
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.navigation_user:
                 title = "Profile";
-                fragment = new ProfilAdminFragment();
+                fragment = new ProfleUserFragment();
                 break;
         }
         MainActivity.this.getSupportActionBar().setTitle(title);

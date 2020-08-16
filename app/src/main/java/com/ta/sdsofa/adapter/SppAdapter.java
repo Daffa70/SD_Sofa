@@ -64,7 +64,7 @@ public class SppAdapter extends RecyclerView.Adapter<SppAdapter.SppViewHolder> {
     public class SppViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImage;
-        private TextView tvNama, tvStatus;
+        private TextView tvNama, tvStatus, tvBulan;
 
         public SppViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +72,7 @@ public class SppAdapter extends RecyclerView.Adapter<SppAdapter.SppViewHolder> {
             tvNama = itemView.findViewById(R.id.textViewNama);
             tvStatus = itemView.findViewById(R.id.textViewStatus);
             ivImage = itemView.findViewById(R.id.image);
+            tvBulan = itemView.findViewById(R.id.bulan);
         }
 
         public void bind(final SppModel sppModel) {
@@ -84,6 +85,46 @@ public class SppAdapter extends RecyclerView.Adapter<SppAdapter.SppViewHolder> {
                     //.into(ivImage);
             tvNama.setText(sppModel.getNama());
             tvStatus.setText(sppModel.getStatus_pembayaran());
+
+            switch (sppModel.getUntuk_bulan()){
+                case("1"):
+                    tvBulan.setText("Januari");
+                    break;
+                case("2"):
+                    tvBulan.setText("Febuari");
+                    break;
+                case("3"):
+                    tvBulan.setText("Maret");
+                    break;
+                case("4"):
+                    tvBulan.setText("April");
+                    break;
+                case("5"):
+                    tvBulan.setText("Mei");
+                    break;
+                case("6"):
+                    tvBulan.setText("Juni");
+                    break;
+                case("7"):
+                    tvBulan.setText("Juli");
+                    break;
+                case("8"):
+                    tvBulan.setText("Agustus");
+                    break;
+                case("9"):
+                    tvBulan.setText("September");
+                    break;
+                case("10"):
+                    tvBulan.setText("Oktober");
+                    break;
+                case("11"):
+                    tvBulan.setText("November");
+                    break;
+                case("12"):
+                    tvBulan.setText("Desember");
+                    break;
+
+            }
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

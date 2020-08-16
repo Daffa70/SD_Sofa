@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ProfilAdminFragment"
+    tools:context=".fragment.ProfleUserFragment"
     android:padding="16dp"
     android:clipToPadding="false">
 
@@ -20,6 +20,7 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_account"
         android:layout_marginTop="50dp"
+        android:id="@+id/image"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -28,6 +29,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginLeft="115dp"
         android:textSize="25dp"
+        android:id="@+id/nama"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -36,11 +38,12 @@
         android:textSize="20dp"
         android:layout_marginTop="85dp"
         android:layout_marginLeft="115dp"
+        android:id="@+id/nisn"
         />
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="155dp"
         android:background="#cfd1d0"
         android:layout_marginLeft="-16dp"
         android:layout_marginRight="-16dp"
@@ -51,5 +54,4 @@
         android:layout_height="wrap_content"
         android:text="KELUAR"
         android:layout_marginTop="200dp"/>
-
-</RelativeLayout>
+</FrameLayout>
