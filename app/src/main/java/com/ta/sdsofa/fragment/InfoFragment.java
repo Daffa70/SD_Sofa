@@ -104,6 +104,7 @@ public class InfoFragment extends Fragment {
                                 infoModel.setIsi(item.getString("isi"));
                                 infoModel.setTanggal(item.getString("tanggal"));
                                 infoModel.setSubjek(item.getString("subjek"));
+                                infoModel.setFoto(item.getString("foto"));
 
                                 data.add(infoModel);
                             }

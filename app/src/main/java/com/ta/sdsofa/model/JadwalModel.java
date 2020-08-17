@@ -10,6 +10,24 @@ public class JadwalModel implements Parcelable {
     private String guru;
     private String jam;
     private String jam_Waktu;
+    private String hari;
+    private String kelas;
+
+    public String getKelas() {
+        return kelas;
+    }
+
+    public void setKelas(String kelas) {
+        this.kelas = kelas;
+    }
+
+    public String getHari() {
+        return hari;
+    }
+
+    public void setHari(String hari) {
+        this.hari = hari;
+    }
 
     public String getId() {
         return id;
@@ -63,6 +81,8 @@ public class JadwalModel implements Parcelable {
         parcel.writeString(this.guru);
         parcel.writeString(this.jam);
         parcel.writeString(this.jam_Waktu);
+        parcel.writeString(this.hari);
+        parcel.writeString(this.kelas);
 
     }
 
@@ -75,6 +95,9 @@ public class JadwalModel implements Parcelable {
         this.guru = in.readString();
         this.jam = in.readString();
         this.jam_Waktu = in.readString();
+        this.hari = in.readString();
+        this.kelas = in.readString();
+
     }
 
     public static final Creator<JadwalModel> CREATOR = new Creator<JadwalModel>() {

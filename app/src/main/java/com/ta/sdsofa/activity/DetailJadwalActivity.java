@@ -1,11 +1,14 @@
 package com.ta.sdsofa.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -58,6 +61,9 @@ public class DetailJadwalActivity extends AppCompatActivity {
                 public void onItemClickListener(JadwalModel jadwalModel) {
                 Intent intent = new Intent(DetailJadwalActivity.this, DetailJadwalDuoActivity.class);
                 intent.putExtra("data", jadwalModel);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
+
+                startActivity(intent);
                 }
             });
         }
@@ -91,6 +97,8 @@ public class DetailJadwalActivity extends AppCompatActivity {
                                 jadwalModel.setGuru(item.getString("guru"));
                                 jadwalModel.setJam(item.getString("jam"));
                                 jadwalModel.setJam_Waktu(item.getString("jam_waktu"));
+                                jadwalModel.setHari(item.getString("hari"));
+                                jadwalModel.setKelas(item.getString("kelas"));
 
 
                                 data.add(jadwalModel);
@@ -112,5 +120,20 @@ public class DetailJadwalActivity extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(DetailJadwalActivity.this).add(request);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(sessionManager.getRole().equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_tambah_jadwal, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_refresh){
+            getData();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

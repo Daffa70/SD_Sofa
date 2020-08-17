@@ -74,7 +74,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
 
         public void bind(final InfoModel infoModel) {
             tvTitle.setText(infoModel.getJudul());
-            tvAuthor.setText(infoModel.getIsi());
+            tvAuthor.setText(infoModel.getSubjek());
             tvCreatedAt.setText(infoModel.getTanggal());
 
 

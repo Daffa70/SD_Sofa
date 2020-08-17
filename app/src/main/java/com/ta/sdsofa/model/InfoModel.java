@@ -10,6 +10,15 @@ public class InfoModel implements Parcelable{
     private String tanggal;
     private String id_penulis;
     private String subjek;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getSubjek() {
         return subjek;
@@ -72,6 +81,7 @@ public class InfoModel implements Parcelable{
         dest.writeString(this.tanggal);
         dest.writeString(this.id_penulis);
         dest.writeString(this.subjek);
+        dest.writeString(this.foto);
     }
 
     public InfoModel(){
@@ -85,6 +95,7 @@ public class InfoModel implements Parcelable{
         this.tanggal = in.readString();
         this.id_penulis = in.readString();
         this.subjek = in.readString();
+        this.foto = in.readString();
     }
 
     public static final Creator<InfoModel> CREATOR = new Creator<InfoModel>() {

@@ -147,4 +147,5 @@ public class InfoDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

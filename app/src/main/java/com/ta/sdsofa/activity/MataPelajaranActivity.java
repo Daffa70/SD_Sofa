@@ -1,18 +1,23 @@
 package com.ta.sdsofa.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.ta.sdsofa.R;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.model.KelasRowModel;
 
 public class MataPelajaranActivity extends AppCompatActivity {
     private CardView senin,selasa,rabu,kamis,jumaat;
     private KelasRowModel kelasRowModel;
+    private SessionManager sessionManager;
 
 
     @Override
@@ -25,6 +30,7 @@ public class MataPelajaranActivity extends AppCompatActivity {
         rabu = findViewById(R.id.rabu);
         kamis = findViewById(R.id.kamis);
         jumaat = findViewById(R.id.jumaat);
+        sessionManager = new SessionManager(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
 
 
@@ -82,5 +88,25 @@ public class MataPelajaranActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(sessionManager.getRole().equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_tambah_jadwal2, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_tambah){
+            Intent intent = new Intent(this, TambahJadwalActivity.class);
+            intent.putExtra("kelas", kelasRowModel.getKelas());
+
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
