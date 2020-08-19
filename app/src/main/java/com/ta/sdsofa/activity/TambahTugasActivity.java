@@ -52,6 +52,7 @@ public class TambahTugasActivity extends AppCompatActivity {
     private Button btnSubmit, btnChoosefile;
     private UtilMessage utilMessage;
     private KelasRowModel kelasRowModel;
+    private Calendar calendar;
     int CODE_GALLERY_REQUEST = 999;
     Bitmap bitmap;
 
@@ -85,6 +86,10 @@ public class TambahTugasActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,14 +111,10 @@ public class TambahTugasActivity extends AppCompatActivity {
         final String guru = edtGuru.getText().toString();
         final String kelas1 = edtKelas.getText().toString();
 
-
-
-
-
         int   day  = deadline.getDayOfMonth();
         int   month= deadline.getMonth();
         int   year = deadline.getYear();
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         calendar.set(year, month, day);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

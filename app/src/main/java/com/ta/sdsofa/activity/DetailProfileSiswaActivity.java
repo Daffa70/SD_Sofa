@@ -9,7 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +46,9 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private UtilMessage utilMessage;
     private ImageView fotoSiswa;
+    private Spinner dropdown;
+    private String absen;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +66,87 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
         nama_wali = findViewById(R.id.tv_namawali);
         nohpwali = findViewById(R.id.tv_hpwali);
         fotoSiswa = findViewById(R.id.foto_siswa);
+        btnSubmit = findViewById(R.id.btn_absen);
+        //get the spinner from the xml.
+        dropdown = findViewById(R.id.spinner1);
+        //create a list of items for the spinner.
+        String[] items = new String[]{"hadir", "sakit", "ijin", "absen"};
+        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+        //There are multiple variations of this, but this is the basic variant.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        //set the spinners adapter to the previously created one.
+        dropdown.setAdapter(adapter);
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                absen = adapterView.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitData();
+            }
+        });
 
         siswaModel = (SiswaModel) getIntent().getExtras().get("data");
 
         setData(siswaModel);
+    }
+
+    private void submitData() {
+        StringRequest request = new StringRequest(Request.Method.POST,
+                BASE_URL + "tambah_absen.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        utilMessage.dismissProgressBar();
+                        try {
+                            JSONObject jsonRespone = new JSONObject(response);
+
+                            int status = jsonRespone.getInt("status");
+                            String message = jsonRespone.getString("message");
+
+                            if (status == 1 ){
+                                Toast.makeText(DetailProfileSiswaActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(DetailProfileSiswaActivity.this, message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        catch (JSONException e){
+                            Toast.makeText(DetailProfileSiswaActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                utilMessage.dismissProgressBar();
+                Toast.makeText(DetailProfileSiswaActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("nisn", siswaModel.getNisn());
+                params.put("status", absen);
+
+
+                return params;
+            }
+        };
+
+        utilMessage.showProgressBar("Submiting Data");
+        Volley.newRequestQueue(this).add(request);
     }
 
     private void setData(SiswaModel siswaModel) {

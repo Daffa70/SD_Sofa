@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ta.sdsofa.R;
+import com.ta.sdsofa.activity.AbsensiSiswaActivity;
 import com.ta.sdsofa.activity.DetailSiswaActivity;
 import com.ta.sdsofa.activity.MataPelajaranActivity;
 import com.ta.sdsofa.activity.RowTugasActivity;
@@ -20,7 +21,7 @@ import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.model.KelasRowModel;
 
 public class UserKelasFragment extends Fragment {
-    private CardView rvDaftarSiswa, rvMataPelajaran, rvDaftarTugas;
+    private CardView rvabsen, rvMataPelajaran, rvDaftarTugas;
     private KelasRowModel kelasRowModel;
     private SessionManager sessionManager;
 
@@ -39,6 +40,7 @@ public class UserKelasFragment extends Fragment {
 
         rvMataPelajaran = view.findViewById(R.id.rl_mataPelajaran);
         rvDaftarTugas = view.findViewById(R.id.rl_daftarTugas);
+        rvabsen = view.findViewById(R.id.rl_absensi);
         kelasRowModel = new KelasRowModel();
         sessionManager = new SessionManager(getContext());
 
@@ -53,6 +55,14 @@ public class UserKelasFragment extends Fragment {
                 intentTugas.putExtra("data", kelasRowModel);
 
                 startActivity(intentTugas);
+            }
+        });
+        rvabsen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), AbsensiSiswaActivity.class);
+
+                startActivity(intent);
             }
         });
         rvMataPelajaran.setOnClickListener(new View.OnClickListener() {
