@@ -144,7 +144,7 @@ public class EditTugasActivity extends AppCompatActivity {
 
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
-                    BASE_URL + "tambah_tugas.php",
+                    BASE_URL + "edt_tugas.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -179,6 +179,7 @@ public class EditTugasActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() throws AuthFailureError {
                     HashMap<String, String> params = new HashMap<>();
                     String imageData = imageToString(bitmap);
+                    params.put("id", tugasModel.getId());
                     params.put("mata_pelajaran", matapelajaran);
                     params.put("nama_tugas", namatugas);
                     params.put("tugas", tugas);
