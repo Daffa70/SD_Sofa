@@ -10,11 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.model.InfoModel;
 import com.ta.sdsofa.model.KelasRowModel;
 
 import java.util.ArrayList;
+
+import static com.ta.sdsofa.helper.GlobalVariable.ICON_KELAS;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class RowKelasAdapter extends RecyclerView.Adapter<RowKelasAdapter.RowKelasViewHolder>{
     private Context context;
@@ -69,12 +73,18 @@ public class RowKelasAdapter extends RecyclerView.Adapter<RowKelasAdapter.RowKel
 
             tvKelas = itemView.findViewById(R.id.textView1);
             tvWaliKelas = itemView.findViewById(R.id.textView2);
+            ivImage = itemView.findViewById(R.id.image);
 
         }
 
         public void bind(final KelasRowModel kelasRowModel) {
             tvKelas.setText(kelasRowModel.getKelas());
             tvWaliKelas.setText(kelasRowModel.getWali_kelas());
+
+            Glide.with(context)
+                    .load(ICON_KELAS+kelasRowModel.getFoto())
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .into(ivImage);
 
 
 

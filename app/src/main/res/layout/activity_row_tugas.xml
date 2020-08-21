@@ -5,10 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RowTugasActivity">
-    <androidx.recyclerview.widget.RecyclerView
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_rowtugas"
-        />
+        android:id="@+id/swiperefresh"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_rowtugas"
+            />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </RelativeLayout>

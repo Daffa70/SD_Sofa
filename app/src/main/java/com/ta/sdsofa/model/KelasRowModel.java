@@ -7,6 +7,8 @@ public class KelasRowModel implements Parcelable {
     private String id;
     private String kelas;
     private String wali_kelas;
+    private String foto;
+
 
     public String getId() {
         return id;
@@ -37,11 +39,20 @@ public class KelasRowModel implements Parcelable {
         return 0;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.id);
         parcel.writeString(this.kelas);
         parcel.writeString(this.wali_kelas);
+        parcel.writeString(this.foto);
     }
 
     public KelasRowModel(){
@@ -52,6 +63,7 @@ public class KelasRowModel implements Parcelable {
         this.id = in.readString();
         this.kelas = in.readString();
         this.wali_kelas = in.readString();
+        this.foto = in.readString();
 
     }
     public static final Creator<KelasRowModel> CREATOR = new Creator<KelasRowModel>() {

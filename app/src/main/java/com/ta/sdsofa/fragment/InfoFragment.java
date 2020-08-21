@@ -8,7 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +46,7 @@ public class InfoFragment extends Fragment {
     private InfoAdapter infoAdapter;
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public InfoFragment(){
 
@@ -62,6 +65,7 @@ public class InfoFragment extends Fragment {
 
         setHasOptionsMenu(true);
         rvList = view.findViewById(R.id.rv_list);
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         sessionManager = new SessionManager(getContext());
         utilMessage = new UtilMessage(getActivity());
         infoAdapter = new InfoAdapter(getContext(), new ArrayList<InfoModel>());
@@ -78,6 +82,14 @@ public class InfoFragment extends Fragment {
         rvList.setAdapter(infoAdapter);
 
         getData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                        getData();
+                        swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
 

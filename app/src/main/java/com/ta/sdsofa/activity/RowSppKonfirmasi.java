@@ -3,9 +3,11 @@ package com.ta.sdsofa.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -39,6 +41,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
     private SessionManager sessionManager;
     private String bulan, status_pembayaran,web, kelas, id;
     private Button button;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class RowSppKonfirmasi extends AppCompatActivity {
         setContentView(R.layout.activity_row_spp_konfirmasi);
 
         recyclerView = findViewById(R.id.rv_rowSpp);
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
         utilMessage = new UtilMessage(this);
         sessionManager = new SessionManager(this);
 
@@ -70,6 +74,14 @@ public class RowSppKonfirmasi extends AppCompatActivity {
         recyclerView.setAdapter(sppAdapter);
 
         getData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void getData() {

@@ -99,6 +99,7 @@ public class KelasFragment extends Fragment {
                                 kelasRowModel.setId(item.getString("id"));
                                 kelasRowModel.setKelas(item.getString("kelas"));
                                 kelasRowModel.setWali_kelas(item.getString("wali_kelas"));
+                                kelasRowModel.setFoto(item.getString("foto"));
 
                                 data.add(kelasRowModel);
                             }

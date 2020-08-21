@@ -3,6 +3,7 @@ package com.ta.sdsofa.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -33,6 +34,8 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
     private AbsenAdapter absenAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
 
         utilMessage = new UtilMessage(this);
         sessionManager = new SessionManager(this);
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
 
         absenAdapter = new AbsenAdapter(this, new ArrayList<AbsenModel>());
         absenAdapter.setAdapterListener(new AbsenAdapter.AbsenAdapterListener() {
@@ -55,6 +59,14 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
         recyclerView.setAdapter(absenAdapter);
 
         getData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 

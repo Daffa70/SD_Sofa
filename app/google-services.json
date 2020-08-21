@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "776340164746",
+    "firebase_url": "https://sdsofa.firebaseio.com",
+    "project_id": "sdsofa",
+    "storage_bucket": "sdsofa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776340164746:android:a7da6d53fdd98280395d73",
+        "android_client_info": {
+          "package_name": "com.ta.sdsofa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776340164746-f935d5gbsntfbt8h4ddpvvved777jhr9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoQaz-7Z39Uf8MZlyIfGfZz73WcpeozhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776340164746-f935d5gbsntfbt8h4ddpvvved777jhr9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
