@@ -10,55 +10,92 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
         >
-        <androidx.cardview.widget.CardView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_SiswaLunas"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="130dp"
-                android:text="Siswa Lunas"
-                android:textSize="30dp" />
-        </androidx.cardview.widget.CardView>
+            android:text="Menu pembayaran"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
     </RelativeLayout>
 
-    <RelativeLayout
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:clickable="true"
-
+        android:columnOrderPreserved="false"
+        android:layout_marginTop="50dp"
         >
+
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:id="@+id/rl_SiswaLunas"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
-            android:id="@+id/rl_MenungguKonfirmasi"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="130dp"
-                android:text="Menunggu Konfirmasi"
-                android:textSize="30dp" />
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="145dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/money" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Daftar Pembayaran Siswa"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rl_MenungguKonfirmasi"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="149dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/notepad" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Menunggu Konfirmasi"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
 
 </RelativeLayout>

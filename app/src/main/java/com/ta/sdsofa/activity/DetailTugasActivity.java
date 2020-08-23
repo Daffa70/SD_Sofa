@@ -1,14 +1,18 @@
 package com.ta.sdsofa.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
@@ -30,12 +37,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_SPP;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_TUGAS;
 
 public class DetailTugasActivity extends AppCompatActivity {
     private TextView namaTugas, tugas, mata_pelajaran, guru, kelas, date, deadline;
     private TugasModel tugasModel;
     private SessionManager sessionManager;
     private UtilMessage utilMessage;
+    private ImageView imageView;
 
 
     @Override
@@ -54,6 +64,8 @@ public class DetailTugasActivity extends AppCompatActivity {
         deadline = findViewById(R.id.text_due);
         tugasModel = (TugasModel) getIntent().getExtras().get("data");
 
+        imageView = findViewById(R.id.imageViewdetailTugas);
+
         setData(tugasModel);
 
     }
@@ -67,6 +79,18 @@ public class DetailTugasActivity extends AppCompatActivity {
             kelas.setText(tugasModel.getKelas());
             date.setText(tugasModel.getDate());
             deadline.setText(tugasModel.getDeadline());
+
+            Glide.with(this).asBitmap().load(IMAGE_TUGAS + tugasModel.getFoto()).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    imageView.setImageBitmap(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+                }
+            });
+
         }
     }
 

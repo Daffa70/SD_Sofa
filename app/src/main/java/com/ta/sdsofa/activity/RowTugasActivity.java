@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.SiswaAdapter;
 import com.ta.sdsofa.adapter.TugasAdapter;
@@ -42,6 +44,7 @@ public class RowTugasActivity extends AppCompatActivity {
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,20 @@ public class RowTugasActivity extends AppCompatActivity {
         });
         
         getData();
+
+        floatingActionButton = findViewById(R.id.fab);
+        if(sessionManager.getRole().equals("admin")){
+            floatingActionButton.show();
+        }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RowTugasActivity.this, TambahTugasActivity.class);
+                intent.putExtra("kelas", kelasRowModel);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -126,26 +143,5 @@ public class RowTugasActivity extends AppCompatActivity {
                 });
 
         Volley.newRequestQueue(RowTugasActivity.this).add(request);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(sessionManager.getRole().equals("admin")){
-            getMenuInflater().inflate(R.menu.menu_tambah_tugas, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_tambah){
-            Intent intent = new Intent(this, TambahTugasActivity.class);
-            intent.putExtra("kelas", kelasRowModel);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.action_refresh){
-            getData();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

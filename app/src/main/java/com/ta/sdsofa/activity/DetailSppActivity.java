@@ -118,49 +118,47 @@ public class DetailSppActivity extends AppCompatActivity {
     }
 
     private void konfirmasiData() {
-        StringRequest request = new StringRequest(Request.Method.POST,
-                BASE_URL + "konfirmasi_spp.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        utilMessage.dismissProgressBar();
-                        try {
-                            JSONObject jsonRespone = new JSONObject(response);
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    BASE_URL + "konfirmasi_spp.php",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            utilMessage.dismissProgressBar();
+                            try {
+                                JSONObject jsonRespone = new JSONObject(response);
 
-                            int status = jsonRespone.getInt("status");
-                            String message = jsonRespone.getString("message");
+                                int status = jsonRespone.getInt("status");
+                                String message = jsonRespone.getString("message");
 
-                            if (status == 0 ){
-                                Toast.makeText(DetailSppActivity.this, message, Toast.LENGTH_SHORT).show();
+                                if (status == 0) {
+                                    Toast.makeText(DetailSppActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                            }
-                            else{
-                                Toast.makeText(DetailSppActivity.this, "Gagal " + message, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(DetailSppActivity.this, "Gagal " + message, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(DetailSppActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
-                        catch (JSONException e){
-                            Toast.makeText(DetailSppActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                utilMessage.dismissProgressBar();
-                Toast.makeText(DetailSppActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<>();
-                params.put("id", sppModel.getId());
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    utilMessage.dismissProgressBar();
+                    Toast.makeText(DetailSppActivity.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("id", sppModel.getId());
 
 
-                return params;
-            }
-        };
+                    return params;
+                }
+            };
 
-        utilMessage.showProgressBar("Submiting Data");
-        Volley.newRequestQueue(this).add(request);
+            utilMessage.showProgressBar("Submiting Data");
+            Volley.newRequestQueue(this).add(request);
     }
 
 
@@ -185,58 +183,60 @@ public class DetailSppActivity extends AppCompatActivity {
     }
 
     private void submitData() {
-        StringRequest request = new StringRequest(Request.Method.POST,
-                BASE_URL + "edit_spp.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        utilMessage.dismissProgressBar();
-                        try {
-                            JSONObject jsonRespone = new JSONObject(response);
+        if(bitmap == null){
+            Toast.makeText(this, "Mohon pilih foto bukti", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            StringRequest request = new StringRequest(Request.Method.POST,
+                    BASE_URL + "edit_spp.php",
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            utilMessage.dismissProgressBar();
+                            try {
+                                JSONObject jsonRespone = new JSONObject(response);
 
-                            int status = jsonRespone.getInt("status");
-                            String message = jsonRespone.getString("message");
+                                int status = jsonRespone.getInt("status");
+                                String message = jsonRespone.getString("message");
 
-                            if (status == 0 ){
-                                Toast.makeText(DetailSppActivity.this, message, Toast.LENGTH_SHORT).show();
+                                if (status == 0) {
+                                    Toast.makeText(DetailSppActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                            }
-                            else{
-                                Toast.makeText(DetailSppActivity.this, "Tambah gagal " + message, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(DetailSppActivity.this, "Tambah gagal " + message, Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Toast.makeText(DetailSppActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
-                        catch (JSONException e){
-                            Toast.makeText(DetailSppActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    utilMessage.dismissProgressBar();
+                    Toast.makeText(DetailSppActivity.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> params = new HashMap<>();
+                    String imageData;
+
+                    if (bitmap == null) {
+                        imageData = sppModel.getBukti();
+                    } else {
+                        imageData = imageToString(bitmap);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                utilMessage.dismissProgressBar();
-                Toast.makeText(DetailSppActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<>();
-                String imageData;
+                    params.put("id", sppModel.getId());
+                    params.put("foto", imageData);
 
-                if (bitmap == null){
-                    imageData = sppModel.getBukti();
+
+                    return params;
                 }
-                else{
-                    imageData = imageToString(bitmap);
-                }
-                params.put("id", sppModel.getId());
-                params.put("foto", imageData);
+            };
 
-
-                return params;
-            }
-        };
-
-        utilMessage.showProgressBar("Submiting Data");
-        Volley.newRequestQueue(this).add(request);
+            utilMessage.showProgressBar("Submiting Data");
+            Volley.newRequestQueue(this).add(request);
+        }
     }
 
     @Override

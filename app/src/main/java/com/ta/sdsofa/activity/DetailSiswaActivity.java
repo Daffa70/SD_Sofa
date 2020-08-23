@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.InfoAdapter;
 import com.ta.sdsofa.adapter.SiswaAdapter;
@@ -40,6 +43,8 @@ public class DetailSiswaActivity extends AppCompatActivity {
     private UtilMessage utilMessage;
     private KelasRowModel kelasRowModel;
     private SessionManager sessionManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private FloatingActionButton floatingActionButton;
 
 
     @Override
@@ -66,6 +71,28 @@ public class DetailSiswaActivity extends AppCompatActivity {
         recyclerViewSiswa.setAdapter(siswaAdapter);
 
         getData();
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        floatingActionButton = findViewById(R.id.fab);
+        if(sessionManager.getRole().equals("admin")){
+            floatingActionButton.show();
+        }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailSiswaActivity.this, TambahSiswaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -121,23 +148,4 @@ public class DetailSiswaActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(sessionManager.getRole().equals("admin")){
-            getMenuInflater().inflate(R.menu.menu_tambah_siswa, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_tambah){
-            Intent intent = new Intent(this, TambahSiswaActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.action_refresh){
-            getData();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

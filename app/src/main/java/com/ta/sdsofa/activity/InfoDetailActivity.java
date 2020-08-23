@@ -1,11 +1,14 @@
 package com.ta.sdsofa.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.util.Util;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.fragment.InfoFragment;
@@ -34,6 +40,8 @@ import java.util.Map;
 import java.util.zip.Inflater;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_TUGAS;
 
 public class InfoDetailActivity extends AppCompatActivity {
     private TextView tvJudul,tvSubjek,tvIsi;
@@ -51,6 +59,8 @@ public class InfoDetailActivity extends AppCompatActivity {
         tvJudul = findViewById(R.id.textJudul);
         tvSubjek = findViewById(R.id.textSubjek);
         tvIsi = findViewById(R.id.TextIsi);
+        imageView = findViewById(R.id.imageViewdetailInfo);
+
         sessionManager = new SessionManager(this);
         utilMessage = new UtilMessage(this);
         infoModel = (InfoModel) getIntent().getExtras().get("data");
@@ -66,6 +76,17 @@ public class InfoDetailActivity extends AppCompatActivity {
             tvJudul.setText(infoModel.getJudul());
             tvSubjek.setText(infoModel.getSubjek());
             tvIsi.setText(infoModel.getIsi());
+
+            Glide.with(this).asBitmap().load(IMAGE_INFO + infoModel.getFoto()).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    imageView.setImageBitmap(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+                }
+            });
         }
     }
 

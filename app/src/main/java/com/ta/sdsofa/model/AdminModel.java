@@ -10,6 +10,15 @@ public class AdminModel implements Parcelable {
     private String nohp;
     private String jabatan;
     private String matapelajaran;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getId() {
         return id;
@@ -67,6 +76,7 @@ public class AdminModel implements Parcelable {
         dest.writeString(this.matapelajaran);
         dest.writeString(this.nama);
         dest.writeString(this.nohp);
+        dest.writeString(this.foto);
     }
 
     @Override
@@ -85,6 +95,7 @@ public class AdminModel implements Parcelable {
         this.nama = in.readString();
         this.matapelajaran = in.readString();
         this.nohp = in.readString();
+        this.foto = in.readString();
     }
 
     public static final Creator<AdminModel> CREATOR = new Creator<AdminModel>() {

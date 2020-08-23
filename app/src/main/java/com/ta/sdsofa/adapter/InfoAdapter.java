@@ -16,6 +16,8 @@ import com.ta.sdsofa.model.InfoModel;
 
 import java.util.ArrayList;
 
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
+
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
     private Context context;
     private ArrayList<InfoModel> data;
@@ -70,6 +72,8 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             tvTitle = itemView.findViewById(R.id.textMaintitle);
             tvAuthor = itemView.findViewById(R.id.textIsi);
             tvCreatedAt = itemView.findViewById(R.id.texttanggal);
+
+            ivImage = itemView.findViewById(R.id.imageViewInfo);
         }
 
         public void bind(final InfoModel infoModel) {
@@ -77,7 +81,10 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             tvAuthor.setText(infoModel.getSubjek());
             tvCreatedAt.setText(infoModel.getTanggal());
 
-
+            Glide.with(context)
+                    .load(IMAGE_URL+infoModel.getFoto())
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .into(ivImage);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.adapter.JadwalAdapter;
 import com.ta.sdsofa.adapter.TugasAdapter;
@@ -41,6 +44,8 @@ public class DetailJadwalActivity extends AppCompatActivity {
     private KelasRowModel kelasRowModel;
     private String  mataPelajaranActivity;
     private SessionManager sessionManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private FloatingActionButton floatingActionButton;
 
 
 
@@ -50,6 +55,7 @@ public class DetailJadwalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_jadwal);
 
         recyclerView = findViewById(R.id.rowjadwal);
+        floatingActionButton = findViewById(R.id.fab);
         utilMessage = new UtilMessage(this);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
         mataPelajaranActivity = getIntent().getExtras().getString("hari");
@@ -71,6 +77,30 @@ public class DetailJadwalActivity extends AppCompatActivity {
         recyclerView.setAdapter(jadwalAdapter);
 
         getData();
+
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        floatingActionButton = findViewById(R.id.fab);
+        if(sessionManager.getRole().equals("admin")){
+            floatingActionButton.show();
+        }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailJadwalActivity.this, TambahJadwalActivity.class);
+                intent.putExtra("kelas", kelasRowModel.getKelas());
+
+                startActivity(intent);
+            }
+        });
     }
 
     private void getData() {
@@ -121,19 +151,8 @@ public class DetailJadwalActivity extends AppCompatActivity {
 
         Volley.newRequestQueue(DetailJadwalActivity.this).add(request);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(sessionManager.getRole().equals("admin")){
-            getMenuInflater().inflate(R.menu.menu_tambah_jadwal, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_refresh){
-            getData();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
+
+
 }

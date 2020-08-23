@@ -10,11 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.model.SiswaModel;
 import com.ta.sdsofa.model.TugasModel;
 
 import java.util.ArrayList;
+
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHolder> {
     private Context context;
@@ -73,6 +77,8 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
             tvSubjek = itemView.findViewById(R.id.textIsi);
             tvDeadline = itemView.findViewById(R.id.tv_deadline);
 
+            ivImage = itemView.findViewById(R.id.imageViewInfo);
+
         }
 
         public void bind(final TugasModel tugasModel) {
@@ -80,6 +86,11 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
             tvSubjek.setText(tugasModel.getNamatugas());
             tvTanggal.setText(tugasModel.getDate());
             tvDeadline.setText(tugasModel.getDeadline());
+
+            Glide.with(context)
+                    .load(IMAGE_INFO+tugasModel.getFoto())
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .into(ivImage);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

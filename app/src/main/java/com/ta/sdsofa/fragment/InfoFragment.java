@@ -24,9 +24,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ta.sdsofa.R;
+import com.ta.sdsofa.activity.DetailSiswaActivity;
 import com.ta.sdsofa.activity.InfoDetailActivity;
 import com.ta.sdsofa.activity.TambahInfoActivity;
+import com.ta.sdsofa.activity.TambahSiswaActivity;
 import com.ta.sdsofa.adapter.InfoAdapter;
 import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
@@ -47,6 +50,7 @@ public class InfoFragment extends Fragment {
     private UtilMessage utilMessage;
     private SessionManager sessionManager;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private FloatingActionButton floatingActionButton;
 
     public InfoFragment(){
 
@@ -83,6 +87,7 @@ public class InfoFragment extends Fragment {
 
         getData();
 
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -90,6 +95,20 @@ public class InfoFragment extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+        floatingActionButton = view.findViewById(R.id.fab);
+        if(sessionManager.getRole().equals("admin")){
+            floatingActionButton.show();
+        }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TambahSiswaActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -139,22 +158,4 @@ public class InfoFragment extends Fragment {
         Volley.newRequestQueue(getContext()).add(request);
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        if(sessionManager.getRole().equals("admin")) {
-            inflater.inflate(R.menu.menu_tambah_info, menu);
-        }
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_tambah){
-            Intent intent = new Intent(getContext(), TambahInfoActivity.class);
-            startActivity(intent);
-        }
-        else if(item.getItemId() == R.id.refresh){
-            getData();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

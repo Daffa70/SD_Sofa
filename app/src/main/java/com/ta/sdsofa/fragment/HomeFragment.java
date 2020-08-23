@@ -1,5 +1,7 @@
 package com.ta.sdsofa.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
@@ -31,6 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_ADMIN;
 
 
 public class HomeFragment extends Fragment {
@@ -93,7 +99,18 @@ public class HomeFragment extends Fragment {
                                 adminModel.setMatapelajaran(item.getString("mata_pelajaran"));
                                 adminModel.setNama(item.getString("nama"));
                                 adminModel.setNohp(item.getString("nohp"));
+                                adminModel.setFoto(item.getString("foto"));
                                 nama.setText(adminModel.getNama());
+
+                                Glide.with(getContext()).asBitmap().load(IMAGE_ADMIN+adminModel.getFoto()).into(new CustomTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        imgProfile.setImageBitmap(resource);
+                                    }
+                                    @Override
+                                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                                    }
+                                });
 
                                 data.add(adminModel);
                             }

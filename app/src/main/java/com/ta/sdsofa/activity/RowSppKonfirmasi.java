@@ -95,25 +95,33 @@ public class RowSppKonfirmasi extends AppCompatActivity {
 
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            JSONArray jsonData = jsonResponse.getJSONArray("data");
+                            int status = jsonResponse.getInt("status");
+                            String message = jsonResponse.getString("message");
 
-                            ArrayList<SppModel> data = new ArrayList<>();
-                            for (int index = 0; index < jsonData.length(); index++) {
-                                JSONObject item = jsonData.getJSONObject(index);
-                                SppModel sppModel = new SppModel();
+                            if (status == 0){
+                                JSONArray jsonData = jsonResponse.getJSONArray("data");
 
-                                sppModel.setId(item.getString("id"));
-                                sppModel.setNisn(item.getString("nisn"));
-                                sppModel.setNama(item.getString("nama_siswa"));
-                                sppModel.setKelas(item.getString("kelas"));
-                                sppModel.setUntuk_bulan(item.getString("untuk_bulan"));
-                                sppModel.setTgl_pembayaran(item.getString("tgl_pembayaran"));
-                                sppModel.setBukti(item.getString("bukti"));
-                                sppModel.setStatus_pembayaran(item.getString("status_pembayaran"));
-                                data.add(sppModel);
+                                ArrayList<SppModel> data = new ArrayList<>();
+                                for (int index = 0; index < jsonData.length(); index++) {
+                                    JSONObject item = jsonData.getJSONObject(index);
+                                    SppModel sppModel = new SppModel();
+
+                                    sppModel.setId(item.getString("id"));
+                                    sppModel.setNisn(item.getString("nisn"));
+                                    sppModel.setNama(item.getString("nama_siswa"));
+                                    sppModel.setKelas(item.getString("kelas"));
+                                    sppModel.setUntuk_bulan(item.getString("untuk_bulan"));
+                                    sppModel.setTgl_pembayaran(item.getString("tgl_pembayaran"));
+                                    sppModel.setBukti(item.getString("bukti"));
+                                    sppModel.setStatus_pembayaran(item.getString("status_pembayaran"));
+                                    data.add(sppModel);
+                                }
+                                sppAdapter.setData(data);
+                            }
+                            else{
+                                Toast.makeText(RowSppKonfirmasi.this, message, Toast.LENGTH_SHORT).show();
                             }
 
-                            sppAdapter.setData(data);
                         } catch (JSONException e) {
 
                             Toast.makeText(RowSppKonfirmasi.this, e.getMessage(), Toast.LENGTH_SHORT).show();
