@@ -47,7 +47,7 @@ import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 public class ProfleUserFragment extends Fragment {
     private Button button;
     private SessionManager sessionManager;
-    private TextView nama, nisn;
+    private TextView nama, nisn, email,nohp;
     private AdminModel adminModel;
     private ImageView imageView;
     private UtilMessage utilMessage;
@@ -69,6 +69,8 @@ public class ProfleUserFragment extends Fragment {
         nama = view.findViewById(R.id.nama);
         nisn = view.findViewById(R.id.nisn);
         imageView = view.findViewById(R.id.image);
+        email = view.findViewById(R.id.email);
+        nohp = view.findViewById(R.id.nohp);
 
 
         utilMessage = new UtilMessage(getActivity());
@@ -127,9 +129,13 @@ public class ProfleUserFragment extends Fragment {
                                 userModel.setNohporangtua(item.getString("nohporangtua"));
                                 userModel.setTanggal_lahir(item.getString("tanggal_lahir"));
                                 userModel.setFoto(item.getString("foto"));
+                                userModel.setEmail(item.getString("email"));
                                 sessionManager.setKelas(item.getString("kelas"));
                                 nama.setText(userModel.getNama());
                                 nisn.setText(userModel.getNisn());
+                                email.setText(userModel.getEmail());
+                                nohp.setText(userModel.getNohp());
+
 
                                 Glide.with(getContext()).asBitmap().load(IMAGE_URL+userModel.getFoto()).into(new CustomTarget<Bitmap>() {
                                     @Override

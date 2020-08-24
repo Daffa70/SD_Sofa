@@ -41,7 +41,7 @@ import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class DetailProfileSiswaActivity extends AppCompatActivity {
-    private TextView nama, nisn, kelas, nohp, tanggal_lahir, tahunmasuk, nama_wali, nohpwali;
+    private TextView nama, nisn, kelas, nohp, tanggal_lahir, tahunmasuk, nama_wali, nohpwali, email;
     private SiswaModel siswaModel;
     private SessionManager sessionManager;
     private UtilMessage utilMessage;
@@ -67,6 +67,8 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
         nohpwali = findViewById(R.id.tv_hpwali);
         fotoSiswa = findViewById(R.id.foto_siswa);
         btnSubmit = findViewById(R.id.btn_absen);
+        email = findViewById(R.id.tv_email);
+
         //get the spinner from the xml.
         dropdown = findViewById(R.id.spinner1);
         //create a list of items for the spinner.
@@ -159,6 +161,7 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
             nama_wali.setText(siswaModel.getWali_murid());
             nohpwali.setText(siswaModel.getNohporangtua());
             tanggal_lahir.setText(siswaModel.getTanggal_lahir());
+            email.setText(siswaModel.getEmail());
 
             Glide.with(this)
                     .load(IMAGE_URL+siswaModel.getFoto())

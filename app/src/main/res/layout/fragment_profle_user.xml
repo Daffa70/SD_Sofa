@@ -1,57 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.ProfleUserFragment"
-    android:padding="16dp"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nama_admin"
-        android:text="Profile"
-        android:textStyle="bold"
-        android:textSize="30dp"
-        />
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_account"
-        android:layout_marginTop="50dp"
-        android:id="@+id/image"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="115dp"
-        android:textSize="25dp"
-        android:id="@+id/nama"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="222222"
-        android:textSize="20dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginLeft="115dp"
-        android:id="@+id/nisn"
-        />
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_marginTop="155dp"
-        android:background="#cfd1d0"
-        android:layout_marginLeft="-16dp"
-        android:layout_marginRight="-16dp"
-        />
+        android:layout_height="300dp">
+        <LinearLayout
+            android:background="@drawable/gradientbackground"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_marginTop="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_account"
+                android:id="@+id/image"
+                />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nama"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="21sp"
+                android:text="Nama"/>
+            <TextView
+
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nisn"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="21sp"
+                android:text="Nisn"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="45dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_email"/>
+            <TextView
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="Wiliam@gmail.com"
+                android:id="@+id/email"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_phone1"/>
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/nohp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="+266 225 225"/>
+        </LinearLayout>
     <Button
-        android:id="@+id/button"
+        android:textColor="#fff"
+        android:background="@drawable/buttonstyle"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="KELUAR"
-        android:layout_marginTop="200dp"/>
-</FrameLayout>
+        android:text="Keluar"
+        android:id="@+id/button"
+        />
+    </LinearLayout>
+</LinearLayout>

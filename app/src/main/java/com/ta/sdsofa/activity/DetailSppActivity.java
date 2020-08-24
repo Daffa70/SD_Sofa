@@ -88,6 +88,12 @@ public class DetailSppActivity extends AppCompatActivity {
             btnKonfirmasi.setVisibility(View.GONE);
         }
 
+        if(sppModel.getStatus_pembayaran().equals("lunas")){
+            btnUpload.setVisibility(View.GONE);
+            btnChooseFile.setVisibility(View.GONE);
+            btnKonfirmasi.setVisibility(View.GONE);
+        }
+
         btnChooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

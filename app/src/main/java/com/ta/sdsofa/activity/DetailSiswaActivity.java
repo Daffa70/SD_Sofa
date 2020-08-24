@@ -126,6 +126,7 @@ public class DetailSiswaActivity extends AppCompatActivity {
                                 siswaModel.setKelas(item.getString("kelas"));
                                 siswaModel.setFoto(item.getString("foto"));
                                 siswaModel.setKota_lahir(item.getString("kota_lahir"));
+                                siswaModel.setEmail(item.getString("email"));
                                 data.add(siswaModel);
                             }
 

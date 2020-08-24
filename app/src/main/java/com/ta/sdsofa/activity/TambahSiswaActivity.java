@@ -49,7 +49,7 @@ import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
 
 public class TambahSiswaActivity extends AppCompatActivity {
     private Button btnSubmit, btnChooseFile;
-    private EditText edtnisn, edtkelas, edtnama, edtalamat,  edtkotalhir, edtnohp, edttahunmasuk, edtnamawali, edtnohpwali;
+    private EditText edtnisn, edtkelas, edtnama, edtalamat,  edtkotalhir, edtnohp, edttahunmasuk, edtnamawali, edtnohpwali, edtemail;
     private DatePicker tanggal;
     private ImageView imageViewFoto;
     private UtilMessage utilMessage;
@@ -70,6 +70,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
         edttahunmasuk = findViewById(R.id.edt_tahun_masuk);
         edtnamawali = findViewById(R.id.edt_nama_wali);
         edtnohpwali = findViewById(R.id.edt_nohp_wali);
+        edtemail = findViewById(R.id.edt_email);
 
         tanggal = findViewById(R.id.edt_tanggal);
 
@@ -110,6 +111,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
         final String tahunmasuk = edttahunmasuk.getText().toString();
         final String namawali = edtnamawali.getText().toString();
         final String nohpwali = edtnohpwali.getText().toString();
+        final String email = edtemail.getText().toString();
 
 
 
@@ -127,7 +129,9 @@ public class TambahSiswaActivity extends AppCompatActivity {
         if (nisn.trim().isEmpty()){
             Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
         }
-
+        else if(bitmap == null){
+            Toast.makeText(this, "Mohon pilih foto", Toast.LENGTH_SHORT).show();
+        }
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
                     BASE_URL + "tambah_siswa.php",
@@ -175,6 +179,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
                     params.put("namawali", namawali);
                     params.put("nohpwali", nohpwali);
                     params.put("tanggal", formatedDate);
+                    params.put("email", email);
                     params.put("foto", imageData);
 
 

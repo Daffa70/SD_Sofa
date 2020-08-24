@@ -50,7 +50,7 @@ import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class EditSiswaActivity extends AppCompatActivity {
     private Button btnSubmit, btnChooseFile;
-    private EditText edtnisn, edtkelas, edtnama, edtalamat,  edtkotalhir, edtnohp, edttahunmasuk, edtnamawali, edtnohpwali;
+    private EditText edtnisn, edtkelas, edtnama, edtalamat,  edtkotalhir, edtnohp, edttahunmasuk, edtnamawali, edtnohpwali, edtemail;
     private DatePicker tanggal;
     private ImageView imageViewFoto;
     private UtilMessage utilMessage;
@@ -72,6 +72,7 @@ public class EditSiswaActivity extends AppCompatActivity {
         edttahunmasuk = findViewById(R.id.edt_tahun_masuk);
         edtnamawali = findViewById(R.id.edt_nama_wali);
         edtnohpwali = findViewById(R.id.edt_nohp_wali);
+        edtemail = findViewById(R.id.edt_email);
 
 
         siswaModel = getIntent().getParcelableExtra("data");
@@ -119,6 +120,7 @@ public class EditSiswaActivity extends AppCompatActivity {
         edttahunmasuk.setText(siswaModel.getTahun_masuk());
         edtnamawali.setText(siswaModel.getWali_murid());
         edtnohpwali.setText(siswaModel.getNohporangtua());
+        edtemail.setText(siswaModel.getEmail());
 
 
 
@@ -159,6 +161,7 @@ public class EditSiswaActivity extends AppCompatActivity {
         final String tahunmasuk = edttahunmasuk.getText().toString();
         final String namawali = edtnamawali.getText().toString();
         final String nohpwali = edtnohpwali.getText().toString();
+        final String email = edtemail.getText().toString();
 
 
 
@@ -231,6 +234,7 @@ public class EditSiswaActivity extends AppCompatActivity {
                     params.put("namawali", namawali);
                     params.put("nohpwali", nohpwali);
                     params.put("tanggal", formatedDate);
+                    params.put("email", email);
                     params.put("foto", imageData);
                     params.put("id", siswaModel.getId());
 

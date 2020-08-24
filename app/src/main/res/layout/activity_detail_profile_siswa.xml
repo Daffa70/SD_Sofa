@@ -169,6 +169,23 @@
             android:text="222"
             android:layout_marginLeft="50dp"
             android:layout_below="@+id/tv_namawali"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv9"
+            android:text="Email"
+            android:layout_below="@+id/tv8"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_email"
+            android:layout_toRightOf="@+id/tv1"
+            android:textSize="20dp"
+            android:text="222"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@+id/tv_hpwali"/>
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="150dp"

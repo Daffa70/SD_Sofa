@@ -16,6 +16,15 @@ public class SiswaModel implements Parcelable {
     private String id;
     private String foto;
     private String kota_lahir;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getKota_lahir() {
         return kota_lahir;
@@ -132,6 +141,7 @@ public class SiswaModel implements Parcelable {
         parcel.writeString(this.id);
         parcel.writeString(this.foto);
         parcel.writeString(this.kota_lahir);
+        parcel.writeString(this.email);
     }
 
     public SiswaModel(){
@@ -151,6 +161,7 @@ public class SiswaModel implements Parcelable {
         this.id = in.readString();
         this.foto = in.readString();
         this.kota_lahir = in.readString();
+        this.email = in.readString();
     }
 
     public static  final Creator<SiswaModel> CREATOR = new Creator<SiswaModel>() {

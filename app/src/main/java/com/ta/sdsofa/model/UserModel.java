@@ -15,7 +15,15 @@ public class UserModel implements Parcelable {
     private String wali_murid;
     private String kelas;
     private String foto;
+    private String email;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getId() {
         return id;
@@ -118,6 +126,7 @@ public class UserModel implements Parcelable {
         parcel.writeString(this.wali_murid);
         parcel.writeString(this.kelas);
         parcel.writeString(this.foto);
+        parcel.writeString(this.email);
     }
 
     @Override
@@ -140,6 +149,7 @@ public class UserModel implements Parcelable {
         this.wali_murid = in.readString();
         this.kelas = in.readString();
         this.foto = in.readString();
+        this.email = in.readString();
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
