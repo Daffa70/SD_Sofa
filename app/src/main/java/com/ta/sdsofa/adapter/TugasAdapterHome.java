@@ -12,26 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ta.sdsofa.R;
-import com.ta.sdsofa.model.SiswaModel;
 import com.ta.sdsofa.model.TugasModel;
 
 import java.util.ArrayList;
 
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_TUGAS;
-import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
-public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHolder> {
+public class TugasAdapterHome extends RecyclerView.Adapter<TugasAdapterHome.TugasViewHolder> {
     private Context context;
     private ArrayList<TugasModel> data;
-    private TugasAdapterListener tugasAdapterListener;
+    private TugasAdapterHomeListener tugasAdapterHomeListener;
 
 
-    public interface TugasAdapterListener{
+    public interface TugasAdapterHomeListener{
         void onItemClickListener(TugasModel tugasModel);
     }
 
-    public TugasAdapter(Context context, ArrayList<TugasModel> data) {
+    public TugasAdapterHome(Context context, ArrayList<TugasModel> data) {
         this.context = context;
         this.data = data;
     }
@@ -41,15 +39,15 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
         notifyDataSetChanged();
     }
 
-    public void setAdapterListener(TugasAdapterListener adapterListener) {
-        this.tugasAdapterListener = adapterListener;
+    public void setAdapterListener(TugasAdapterHomeListener adapterListener) {
+        this.tugasAdapterHomeListener = adapterListener;
     }
 
     @NonNull
     @Override
     public TugasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.row_tugas, parent, false);
+                .inflate(R.layout.row_tugas_home, parent, false);
 
         return new TugasViewHolder(view);
     }
@@ -74,7 +72,6 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
 
 
             tvNamaTugas = itemView.findViewById(R.id.textMaintitle);
-            tvTanggal = itemView.findViewById(R.id.texttanggal);
             tvSubjek = itemView.findViewById(R.id.textIsi);
             tvDeadline = itemView.findViewById(R.id.tv_deadline);
 
@@ -85,7 +82,6 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
         public void bind(final TugasModel tugasModel) {
             tvNamaTugas.setText(tugasModel.getMata_pelajaran());
             tvSubjek.setText(tugasModel.getNamatugas());
-            tvTanggal.setText(tugasModel.getDate());
             tvDeadline.setText(tugasModel.getDeadline());
 
             Glide.with(context)
@@ -97,9 +93,10 @@ public class TugasAdapter extends RecyclerView.Adapter<TugasAdapter.TugasViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    tugasAdapterListener.onItemClickListener(tugasModel);
+                    tugasAdapterHomeListener.onItemClickListener(tugasModel);
                 }
             });
         }
     }
+
 }

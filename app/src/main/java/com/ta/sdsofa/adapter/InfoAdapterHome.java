@@ -19,17 +19,17 @@ import java.util.ArrayList;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
-public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
+public class InfoAdapterHome extends RecyclerView.Adapter<InfoAdapterHome.InfoViewHolder> {
     private Context context;
     private ArrayList<InfoModel> data;
-    private InfoAdapterListener infoAdapterListener;
+    private InfoAdapterHomeListener infoAdapterHomeListener;
 
 
-    public interface InfoAdapterListener{
+    public interface InfoAdapterHomeListener{
         void onItemClickListener(InfoModel infoModel);
     }
 
-    public InfoAdapter(Context context, ArrayList<InfoModel> data) {
+    public InfoAdapterHome(Context context, ArrayList<InfoModel> data) {
         this.context = context;
         this.data = data;
     }
@@ -39,15 +39,15 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         notifyDataSetChanged();
     }
 
-    public void setAdapterListener(InfoAdapterListener adapterListener) {
-        this.infoAdapterListener = adapterListener;
+    public void setAdapterListener(InfoAdapterHomeListener adapterListener) {
+        this.infoAdapterHomeListener = adapterListener;
     }
 
     @NonNull
     @Override
     public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context)
-                .inflate(R.layout.info_adapter, parent, false);
+                .inflate(R.layout.row_info_home, parent, false);
 
         return new InfoViewHolder(view);
     }
@@ -71,8 +71,8 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.textMaintitle);
-            tvAuthor = itemView.findViewById(R.id.textIsi);
-            tvCreatedAt = itemView.findViewById(R.id.texttanggal);
+            tvAuthor = itemView.findViewById(R.id.subjek);
+
 
             ivImage = itemView.findViewById(R.id.imageViewInfo);
         }
@@ -80,16 +80,17 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         public void bind(final InfoModel infoModel) {
             tvTitle.setText(infoModel.getJudul());
             tvAuthor.setText(infoModel.getSubjek());
-            tvCreatedAt.setText(infoModel.getTanggal());
+
 
             Glide.with(context)
                     .load(IMAGE_INFO+infoModel.getFoto())
                     .placeholder(R.mipmap.ic_launcher_round)
                     .into(ivImage);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    infoAdapterListener.onItemClickListener(infoModel);
+                    infoAdapterHomeListener.onItemClickListener(infoModel);
                 }
             });
         }

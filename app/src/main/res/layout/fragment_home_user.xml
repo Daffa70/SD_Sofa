@@ -2,33 +2,97 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".fragment.HomeUserFragment"
-    android:padding="16dp">
-
-
-
-    <ImageView
-        android:id="@+id/imageViewProfile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-
-        android:src="@mipmap/ic_launcher_round" />
-
-    <TextView
-        android:id="@+id/SelamatDatang"
-        android:layout_width="wrap_content"
+    >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="350px"
-        android:textSize="72px"
-        android:text="Selamat Datang," />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_nama"
-        android:layout_marginTop="100px"
-        android:layout_marginLeft="350px"
-        android:text="Nama"
-        android:textSize="72px"
-        />
+        android:id="@+id/swiperefresh"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rl_1"
+                    android:padding="16dp"
+                    android:background="@drawable/gradientbackground">
+                    <ImageView
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@mipmap/ic_launcher_round" />
+                    <TextView
+                        android:id="@+id/SelamatDatang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="350px"
+                        android:textSize="72px"
+                        android:text="Selamat Datang,"
+                        android:textColor="#fff"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_nama"
+                        android:layout_marginTop="100px"
+                        android:layout_marginLeft="350px"
+                        android:text="Nama"
+                        android:textSize="72px"
+                        android:textColor="#fff"
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_1"
+                    android:id="@+id/rl_2"
+
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Info Terbaru"
+                        android:textSize="72px"
+                        android:id="@+id/tv1"
+                        android:textStyle="bold"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv1"
+                        android:orientation="horizontal"
+                        android:id="@+id/rv_info"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_2"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tugas Terbaru"
+                        android:textSize="72px"
+                        android:textStyle="bold"
+                        android:id="@+id/tv3"
+                        />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv3"
+                        android:orientation="horizontal"
+                        android:id="@+id/rv_tugas"/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>
