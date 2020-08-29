@@ -61,6 +61,7 @@ public class UserKelasFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AbsensiSiswaActivity.class);
+                intent.putExtra("nisn", sessionManager.getUserId());
 
                 startActivity(intent);
             }

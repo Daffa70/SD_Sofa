@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_TUGAS;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 public class EditTugasActivity extends AppCompatActivity {
@@ -106,7 +107,7 @@ public class EditTugasActivity extends AppCompatActivity {
         edtGuru.setText(tugasModel.getGuru());
         edtKelas.setText(tugasModel.getKelas());
 
-        Glide.with(this).asBitmap().load(IMAGE_URL+tugasModel.getFoto()).into(new CustomTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(IMAGE_TUGAS+tugasModel.getFoto()).into(new CustomTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 imageView.setImageBitmap(resource);
@@ -158,7 +159,7 @@ public class EditTugasActivity extends AppCompatActivity {
                                 if (status == 0 ){
                                     Toast.makeText(EditTugasActivity.this, message, Toast.LENGTH_SHORT).show();
 
-
+                                    finish();
                                 }
                                 else{
                                     Toast.makeText(EditTugasActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
@@ -178,7 +179,14 @@ public class EditTugasActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     HashMap<String, String> params = new HashMap<>();
-                    String imageData = imageToString(bitmap);
+                    String imageData;
+
+                    if (bitmap == null){
+                        imageData = tugasModel.getFoto();
+                    }
+                    else{
+                        imageData = imageToString(bitmap);
+                    }
                     params.put("id", tugasModel.getId());
                     params.put("mata_pelajaran", matapelajaran);
                     params.put("nama_tugas", namatugas);

@@ -35,6 +35,7 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
     private SessionManager sessionManager;
     private AbsenAdapter absenAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private String nisn;
 
 
     @Override
@@ -43,6 +44,7 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_absensi_siswa);
 
         recyclerView = findViewById(R.id.rv_rowabsen);
+        nisn = getIntent().getExtras().getString("nisn");
 
         utilMessage = new UtilMessage(this);
         sessionManager = new SessionManager(this);
@@ -73,7 +75,7 @@ public class AbsensiSiswaActivity extends AppCompatActivity {
     private void getData() {
         utilMessage.showProgressBar("Getting Info...");
         StringRequest request = new StringRequest(Request.Method.GET,
-                BASE_URL + "get_absen.php?nisn="+sessionManager.getUserId(),
+                BASE_URL + "get_absen.php?nisn="+nisn,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

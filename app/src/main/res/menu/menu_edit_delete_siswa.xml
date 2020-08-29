@@ -10,5 +10,10 @@
         android:title="Delete Siswa"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/action_absensi"
+        android:title="Daftar Absen Siswa"
+        app:showAsAction="never"
+        />
 
 </menu>

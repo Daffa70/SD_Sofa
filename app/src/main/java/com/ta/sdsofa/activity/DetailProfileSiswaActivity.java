@@ -189,6 +189,12 @@ public class DetailProfileSiswaActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 break;
+            case R.id.action_absensi:
+                Intent intent2 = new Intent(this, AbsensiSiswaActivity.class);
+                intent2.putExtra("nisn", siswaModel.getNisn());
+
+                startActivity(intent2);
+                break;
             case R.id.action_delete:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Konfirmasi");

@@ -9,7 +9,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,12 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.helper.UtilMessage;
-import com.ta.sdsofa.model.InfoModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,38 +36,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
-import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
-import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
-public class EditInfoActivity extends AppCompatActivity {
-    private EditText edtJudul, edtSubjek, edtIsi;
+public class TambahKelasActivity extends AppCompatActivity {
+
+    private EditText edtKelas, edtWaliKelas;
     private ImageView foto;
     private UtilMessage utilMessage;
     private Button btnSubmit, btnChooseFile;
-    private InfoModel infoModel;
     int CODE_GALLERY_REQUEST = 999;
     Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_info);
+        setContentView(R.layout.activity_tambah_kelas);
 
-        edtJudul = findViewById(R.id.edt_judul);
-        edtSubjek = findViewById(R.id.edt_subjek);
-        edtIsi = findViewById(R.id.edt_isi);
-        foto = findViewById(R.id.no_imageTugas);
+        edtKelas = findViewById(R.id.edt_kelas);
+        edtWaliKelas = findViewById(R.id.edt_walikelas);
+        foto = findViewById(R.id.no_imageKelas);
+        utilMessage = new UtilMessage(this);
         btnSubmit = findViewById(R.id.btn_submit);
         btnChooseFile = findViewById(R.id.btn_choose_file);
-
-        infoModel = (InfoModel) getIntent().getExtras().get("data");
-        utilMessage = new UtilMessage(this);
 
         btnChooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ActivityCompat.requestPermissions(
-                        EditInfoActivity.this,
+                        TambahKelasActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         CODE_GALLERY_REQUEST
                 );
@@ -85,39 +75,23 @@ public class EditInfoActivity extends AppCompatActivity {
                 submitData();
             }
         });
-
-        setData(infoModel);
-    }
-
-    private void setData(InfoModel infoModel) {
-        edtJudul.setText(infoModel.getJudul());
-        edtSubjek.setText(infoModel.getSubjek());
-        edtIsi.setText(infoModel.getIsi());
-
-        Glide.with(this).asBitmap().load(IMAGE_INFO+infoModel.getFoto()).into(new CustomTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                foto.setImageBitmap(resource);
-            }
-            @Override
-            public void onLoadCleared(@Nullable Drawable placeholder) {
-            }
-        });
     }
 
     private void submitData() {
-        final String judul = edtJudul.getText().toString();
-        final String subjek = edtSubjek.getText().toString();
-        final String isi = edtIsi.getText().toString();
+        final String kelas = edtKelas.getText().toString();
+        final String wali_kelas = edtWaliKelas.getText().toString();
 
 
-        if (judul.trim().isEmpty()){
+
+        if (kelas.trim().isEmpty()){
             Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
         }
-
+        else if(bitmap == null){
+            Toast.makeText(this, "Mohon pilih foto", Toast.LENGTH_SHORT).show();
+        }
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
-                    BASE_URL + "edit_info.php",
+                    BASE_URL + "tambah_kelas.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -129,41 +103,31 @@ public class EditInfoActivity extends AppCompatActivity {
                                 String message = jsonRespone.getString("message");
 
                                 if (status == 0 ){
-                                    Toast.makeText(EditInfoActivity.this, message, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TambahKelasActivity.this, message, Toast.LENGTH_SHORT).show();
 
                                     finish();
                                 }
                                 else{
-                                    Toast.makeText(EditInfoActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TambahKelasActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
                                 }
                             }
                             catch (JSONException e){
-                                Toast.makeText(EditInfoActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TambahKelasActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     utilMessage.dismissProgressBar();
-                    Toast.makeText(EditInfoActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TambahKelasActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     HashMap<String, String> params = new HashMap<>();
-                    String imageData;
-
-                    if (bitmap == null){
-                        imageData = infoModel.getFoto();
-                    }
-                    else{
-                        imageData = imageToString(bitmap);
-                    }
-
-                    params.put("id", infoModel.getId());
-                    params.put("judul", judul);
-                    params.put("isi", isi);
-                    params.put("subjek", subjek);
+                    String imageData = imageToString(bitmap);
+                    params.put("kelas", kelas);
+                    params.put("wali_kelas", wali_kelas);
                     params.put("foto", imageData);
 
                     return params;

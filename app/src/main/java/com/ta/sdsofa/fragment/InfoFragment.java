@@ -104,7 +104,7 @@ public class InfoFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), TambahSiswaActivity.class);
+                Intent intent = new Intent(getContext(), TambahInfoActivity.class);
                 startActivity(intent);
             }
         });

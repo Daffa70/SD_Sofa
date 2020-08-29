@@ -196,7 +196,7 @@ public class EditSiswaActivity extends AppCompatActivity {
                                 if (status == 0 ){
                                     Toast.makeText(EditSiswaActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                                    resetInput();
+                                    finish();
                                 }
                                 else{
                                     Toast.makeText(EditSiswaActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();

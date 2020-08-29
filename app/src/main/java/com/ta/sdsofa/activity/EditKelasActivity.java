@@ -2,10 +2,12 @@ package com.ta.sdsofa.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +16,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +34,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.ta.sdsofa.R;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
-import com.ta.sdsofa.model.InfoModel;
+import com.ta.sdsofa.model.KelasRowModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,38 +46,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
+import static com.ta.sdsofa.helper.GlobalVariable.ICON_KELAS;
 import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_INFO;
-import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
-public class EditInfoActivity extends AppCompatActivity {
-    private EditText edtJudul, edtSubjek, edtIsi;
+public class EditKelasActivity extends AppCompatActivity {
+    private EditText edtKelas, edtWaliKelas;
     private ImageView foto;
     private UtilMessage utilMessage;
     private Button btnSubmit, btnChooseFile;
-    private InfoModel infoModel;
+    private KelasRowModel kelasRowModel;
+    private SessionManager sessionManager;
     int CODE_GALLERY_REQUEST = 999;
     Bitmap bitmap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_info);
+        setContentView(R.layout.activity_edit_kelas);
 
-        edtJudul = findViewById(R.id.edt_judul);
-        edtSubjek = findViewById(R.id.edt_subjek);
-        edtIsi = findViewById(R.id.edt_isi);
-        foto = findViewById(R.id.no_imageTugas);
+        edtKelas = findViewById(R.id.edt_kelas);
+        edtWaliKelas = findViewById(R.id.edt_walikelas);
+        foto = findViewById(R.id.no_imageKelas);
+        utilMessage = new UtilMessage(this);
         btnSubmit = findViewById(R.id.btn_submit);
         btnChooseFile = findViewById(R.id.btn_choose_file);
+        sessionManager = new SessionManager(this);
 
-        infoModel = (InfoModel) getIntent().getExtras().get("data");
-        utilMessage = new UtilMessage(this);
+        kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
 
         btnChooseFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ActivityCompat.requestPermissions(
-                        EditInfoActivity.this,
+                        EditKelasActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         CODE_GALLERY_REQUEST
                 );
@@ -86,15 +93,14 @@ public class EditInfoActivity extends AppCompatActivity {
             }
         });
 
-        setData(infoModel);
+        setData(kelasRowModel);
     }
 
-    private void setData(InfoModel infoModel) {
-        edtJudul.setText(infoModel.getJudul());
-        edtSubjek.setText(infoModel.getSubjek());
-        edtIsi.setText(infoModel.getIsi());
+    private void setData(KelasRowModel kelasRowModel) {
+        edtKelas.setText(kelasRowModel.getKelas());
+        edtWaliKelas.setText(kelasRowModel.getWali_kelas());
 
-        Glide.with(this).asBitmap().load(IMAGE_INFO+infoModel.getFoto()).into(new CustomTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(ICON_KELAS+kelasRowModel.getFoto()).into(new CustomTarget<Bitmap>() {
             @Override
             public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 foto.setImageBitmap(resource);
@@ -106,18 +112,17 @@ public class EditInfoActivity extends AppCompatActivity {
     }
 
     private void submitData() {
-        final String judul = edtJudul.getText().toString();
-        final String subjek = edtSubjek.getText().toString();
-        final String isi = edtIsi.getText().toString();
+        final String kelas = edtKelas.getText().toString();
+        final String wali_kelas = edtWaliKelas.getText().toString();
 
 
-        if (judul.trim().isEmpty()){
+
+        if (kelas.trim().isEmpty()){
             Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
         }
-
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
-                    BASE_URL + "edit_info.php",
+                    BASE_URL + "edit_kelas.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -129,23 +134,23 @@ public class EditInfoActivity extends AppCompatActivity {
                                 String message = jsonRespone.getString("message");
 
                                 if (status == 0 ){
-                                    Toast.makeText(EditInfoActivity.this, message, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditKelasActivity.this, message, Toast.LENGTH_SHORT).show();
 
                                     finish();
                                 }
                                 else{
-                                    Toast.makeText(EditInfoActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EditKelasActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
                                 }
                             }
                             catch (JSONException e){
-                                Toast.makeText(EditInfoActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditKelasActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     utilMessage.dismissProgressBar();
-                    Toast.makeText(EditInfoActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditKelasActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }){
                 @Override
@@ -154,16 +159,14 @@ public class EditInfoActivity extends AppCompatActivity {
                     String imageData;
 
                     if (bitmap == null){
-                        imageData = infoModel.getFoto();
+                        imageData = kelasRowModel.getFoto();
                     }
                     else{
                         imageData = imageToString(bitmap);
                     }
-
-                    params.put("id", infoModel.getId());
-                    params.put("judul", judul);
-                    params.put("isi", isi);
-                    params.put("subjek", subjek);
+                    params.put("id", kelasRowModel.getId());
+                    params.put("kelas", kelas);
+                    params.put("wali_kelas", wali_kelas);
                     params.put("foto", imageData);
 
                     return params;
@@ -217,5 +220,78 @@ public class EditInfoActivity extends AppCompatActivity {
 
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(sessionManager.getRole().equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_delete_jadwal, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.action_delete){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Konfirmasi");
+            builder.setMessage("Anda yakin menghapus \"" + kelasRowModel.getKelas() +"\"?");
+            builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    StringRequest request = new StringRequest(Request.Method.POST,
+                            BASE_URL + "hapus_kelas.php",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    utilMessage.dismissProgressBar();
+
+                                    try{
+                                        JSONObject jsonResponse = new JSONObject(response);
+
+                                        int status = jsonResponse.getInt("status");
+                                        String message = jsonResponse.getString("message");
+
+                                        Toast.makeText(EditKelasActivity.this, message,Toast.LENGTH_SHORT).show();
+
+                                        if(status == 0){
+                                            finish();
+
+                                        }
+                                    } catch (JSONException e){
+                                        Toast.makeText(EditKelasActivity.this, "Error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    utilMessage.dismissProgressBar();
+                                    Toast.makeText(EditKelasActivity.this, "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            HashMap<String, String> params = new HashMap<>();
+                            params.put("id", kelasRowModel.getId());
+                            return params;
+
+                        }
+                    };
+                    utilMessage.showProgressBar("");
+                    Volley.newRequestQueue(EditKelasActivity.this).add(request);
+                }
+            });
+            builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            builder.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

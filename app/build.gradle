@@ -44,6 +44,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
 
+    implementation 'cyd.awesome.android:awesome-material:1.0'
+
 }
 
 apply plugin: 'com.android.application'

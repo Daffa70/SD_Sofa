@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.util.Util;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.activity.DetailKelasActivity;
+import com.ta.sdsofa.activity.TambahInfoActivity;
+import com.ta.sdsofa.activity.TambahKelasActivity;
 import com.ta.sdsofa.adapter.RowKelasAdapter;
+import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
 import com.ta.sdsofa.model.InfoModel;
 import com.ta.sdsofa.model.KelasRowModel;
@@ -44,6 +49,9 @@ public class KelasFragment extends Fragment {
     private RecyclerView recyclerViewKelas;
     private RowKelasAdapter rowKelasAdapter;
     private UtilMessage utilMessage;
+    private FloatingActionButton floatingActionButton;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private SessionManager sessionManager;
 
     public KelasFragment(){
 
@@ -61,6 +69,7 @@ public class KelasFragment extends Fragment {
 
         recyclerViewKelas = view.findViewById(R.id.rv_list_kelas);
         utilMessage = new UtilMessage(getActivity());
+        sessionManager = new SessionManager(getActivity());
         rowKelasAdapter = new RowKelasAdapter(getContext(), new ArrayList<KelasRowModel>());
         rowKelasAdapter.setAdapterListener(new RowKelasAdapter.RowKelasAdapterListener() {
             @Override
@@ -76,6 +85,29 @@ public class KelasFragment extends Fragment {
         recyclerViewKelas.setAdapter(rowKelasAdapter);
 
         getData();
+
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        floatingActionButton = view.findViewById(R.id.fab);
+        if(sessionManager.getRole().equals("admin")){
+            floatingActionButton.show();
+        }
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TambahKelasActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void getData() {

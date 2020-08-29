@@ -12,7 +12,7 @@ import com.ta.sdsofa.R;
 import com.ta.sdsofa.model.KelasRowModel;
 
 public class DetailKelasActivity extends AppCompatActivity {
-    private CardView rvDaftarSiswa, rvMataPelajaran, rvDaftarTugas, rvSpp;
+    private CardView rvDaftarSiswa, rvMataPelajaran, rvDaftarTugas, rvSpp, rvEdit;
     private KelasRowModel kelasRowModel;
 
 
@@ -24,6 +24,7 @@ public class DetailKelasActivity extends AppCompatActivity {
         rvDaftarSiswa = findViewById(R.id.rl_daftarSiswa);
         rvMataPelajaran = findViewById(R.id.rl_mataPelajaran);
         rvDaftarTugas = findViewById(R.id.rl_daftarTugas);
+        rvEdit = findViewById(R.id.rl_setting);
         rvSpp = findViewById(R.id.rl_daftarSpp);
         kelasRowModel = (KelasRowModel) getIntent().getExtras().get("data");
 
@@ -61,6 +62,15 @@ public class DetailKelasActivity extends AppCompatActivity {
                 intentSpp.putExtra("data", kelasRowModel);
 
                 startActivity(intentSpp);
+            }
+        });
+        rvEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), EditKelasActivity.class);
+                intent.putExtra("data", kelasRowModel);
+
+                startActivity(intent);
             }
         });
     }

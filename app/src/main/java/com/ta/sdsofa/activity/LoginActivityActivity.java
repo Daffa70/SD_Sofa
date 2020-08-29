@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import cyd.awesome.material.AwesomeText;
+import cyd.awesome.material.FontCharacterMaps;
+
 import static com.ta.sdsofa.helper.GlobalVariable.BASE_URL;
 
 public class LoginActivityActivity extends AppCompatActivity {
@@ -35,6 +39,9 @@ public class LoginActivityActivity extends AppCompatActivity {
     private Button btnLogin;
     private SessionManager sessionManager;
     private UtilMessage utilMessage;
+    AwesomeText ImgShowHidePassword;
+
+    boolean pwd_status = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +51,27 @@ public class LoginActivityActivity extends AppCompatActivity {
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
         btnLogin = findViewById(R.id.btn_login);
+        ImgShowHidePassword = (AwesomeText)findViewById(R.id.ImgShowPassword);
 
         sessionManager = new SessionManager(this);
         utilMessage = new UtilMessage(this);
+
+        ImgShowHidePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pwd_status) {
+                    edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    pwd_status = false;
+                    ImgShowHidePassword.setMaterialDesignIcon(FontCharacterMaps.MaterialDesign.MD_VISIBILITY);
+                    edtPassword.setSelection(edtPassword.length());
+                } else {
+                    edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                    pwd_status = true;
+                    ImgShowHidePassword.setMaterialDesignIcon(FontCharacterMaps.MaterialDesign.MD_VISIBILITY_OFF);
+                    edtPassword.setSelection(edtPassword.length());
+                }
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

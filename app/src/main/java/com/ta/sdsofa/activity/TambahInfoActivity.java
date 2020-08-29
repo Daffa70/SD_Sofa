@@ -90,7 +90,9 @@ public class TambahInfoActivity extends AppCompatActivity {
         if (judul.trim().isEmpty()){
             Toast.makeText(this, "Tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
         }
-
+        else if(bitmap == null){
+            Toast.makeText(this, "Mohon pilih foto", Toast.LENGTH_SHORT).show();
+        }
         else{
             StringRequest request = new StringRequest(Request.Method.POST,
                     BASE_URL + "tambah_info.php",
@@ -107,7 +109,7 @@ public class TambahInfoActivity extends AppCompatActivity {
                                 if (status == 0 ){
                                     Toast.makeText(TambahInfoActivity.this, message, Toast.LENGTH_SHORT).show();
 
-
+                                    finish();
                                 }
                                 else{
                                     Toast.makeText(TambahInfoActivity.this, "Tambar buku gagal " + message, Toast.LENGTH_SHORT).show();
