@@ -24,7 +24,7 @@ public class CekSession extends AppCompatActivity {
             startActivity(intentLogin);
             finish();
         }
-        else if(sessionManager.getRole().equals("admin")){
+        else if(sessionManager.getRole().equals("admin") || sessionManager.getRole().equals("guru") || sessionManager.getRole().equals("pegawai")){
             Intent intentAdmin = new Intent(this, MainActivityAdmin.class);
             startActivity(intentAdmin);
             finish();

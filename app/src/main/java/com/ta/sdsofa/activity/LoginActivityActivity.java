@@ -115,7 +115,7 @@ public class LoginActivityActivity extends AppCompatActivity {
                                         Intent intentSiswa = new Intent(LoginActivityActivity.this, MainActivity.class);
                                         startActivity(intentSiswa);
                                     }
-                                    else if(role.equals("admin")){
+                                    else if(role.equals("admin") || role.equals("guru") || role.equals("pegawai")){
                                         Intent intentPegawai = new Intent(LoginActivityActivity.this, MainActivityAdmin.class);
                                         startActivity(intentPegawai);
                                     }

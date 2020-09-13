@@ -30,6 +30,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.ta.sdsofa.R;
 import com.ta.sdsofa.activity.LoginActivityActivity;
+import com.ta.sdsofa.activity.TambahAdminActivity;
 import com.ta.sdsofa.helper.SessionManager;
 import com.ta.sdsofa.helper.UtilMessage;
 import com.ta.sdsofa.model.AdminModel;
@@ -47,7 +48,7 @@ import static com.ta.sdsofa.helper.GlobalVariable.IMAGE_URL;
 
 
 public class ProfilAdminFragment extends Fragment {
-    private Button button;
+    private Button button, btn_addAdmin;
     private SessionManager sessionManager;
     private TextView nama, nisn, email, nohp;
     private ImageView imageView;
@@ -73,6 +74,7 @@ public class ProfilAdminFragment extends Fragment {
         imageView = view.findViewById(R.id.image);
         email = view.findViewById(R.id.email);
         nohp = view.findViewById(R.id.nohp);
+        btn_addAdmin = view.findViewById(R.id.btn_tambah_admin);
 
         utilMessage = new UtilMessage(getActivity());
         sessionManager = new SessionManager(getContext());
@@ -101,6 +103,15 @@ public class ProfilAdminFragment extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        btn_addAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TambahAdminActivity.class);
+
+                startActivity(intent);
             }
         });
         getData();
